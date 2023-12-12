@@ -16,12 +16,12 @@ namespace FakeStoreInc.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder("Host=dpg-cls51rbip8as73a3c3pg-a.frankfurt-postgres.render.com;Database=fakestore_db_5r5a;Username=fakestore_db_5r5a_user;Password=AiCIAP8MMmhiys86wQkMwRTkzBscyfCi");
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Default"));
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder
-            .UseNpgsql(dataSource)
-            .UseSnakeCaseNamingConvention();
+                .UseNpgsql(dataSource)
+                .UseSnakeCaseNamingConvention();
             base.OnConfiguring(optionsBuilder);
         }
 

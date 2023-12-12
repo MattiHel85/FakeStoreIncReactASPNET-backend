@@ -23,7 +23,7 @@ namespace FakeStoreInc.Controller.src.Controller
         }
 
         [HttpPost()]
-        public ActionResult<UserReadDTO> CreateOne([FromQuery] UserCreateDTO userCreateDto)
+        public ActionResult<UserReadDTO> CreateOne([FromBody] UserCreateDTO userCreateDto)
         {
             return CreatedAtAction(nameof(CreateOne),_userService.CreateOne(userCreateDto));
         }
