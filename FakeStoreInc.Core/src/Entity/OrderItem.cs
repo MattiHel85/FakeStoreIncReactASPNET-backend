@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FakeStoreInc.Core.src.Entity
+namespace FakeStoreInc.Core.src.Entity.OrderItem
 {
     public class OrderItem : BaseEntity
     {

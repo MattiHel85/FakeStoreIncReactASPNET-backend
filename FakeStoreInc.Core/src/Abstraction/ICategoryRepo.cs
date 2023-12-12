@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FakeStoreInc.Core.src.Entity.Category;
+using FakeStoreInc.Core.src.Parameter;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
     public interface ICategoryRepo
     {
-        void CreateOne(Category category);
 
         IEnumerable<Category> GetAll(GetAllParams options);
 
-        Category GetOne(Guid id);
+        Category GetOneById(Guid id);
+        Category CreateOne(Category category);
         Category UpdateOne(Category category);
         bool DeleteOne(Guid id);
     }

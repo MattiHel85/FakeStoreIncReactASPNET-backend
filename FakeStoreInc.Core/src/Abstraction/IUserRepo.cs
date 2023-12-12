@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Parameter;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
     public interface IUserRepo
     {
-        User CreateOne(User user);
         IEnumerable<User> GetAll(GetAllParams options);
-        User GetOne(Guid id);
+        User GetOneById(Guid id);
+        User CreateOne(User user);
         User UpdateOne(User user);
         bool DeleteOne(Guid id);
     }
