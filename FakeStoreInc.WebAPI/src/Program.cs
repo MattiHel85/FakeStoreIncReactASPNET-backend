@@ -4,6 +4,7 @@ using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.WebAPI.src.Database;
 using FakeStoreInc.WebAPI.src.Repository;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
