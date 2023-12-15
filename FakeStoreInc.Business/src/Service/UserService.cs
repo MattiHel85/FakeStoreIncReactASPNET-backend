@@ -26,7 +26,6 @@ namespace FakeStoreInc.Business.src.Service
             user.Password = hashedPassword;
             user.Salt = salt;
             return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
-
         }
     }
 }

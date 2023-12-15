@@ -8,9 +8,11 @@ namespace FakeStoreInc.Business.src.Service
     public class AuthService : IAuthService
     {
         private IUserRepo _repo;
-        public AuthService(IUserRepo userRepo)
+        private ITokenService _tokenService;
+        public AuthService(IUserRepo userRepo, ITokenService tokenService)
         {
             _repo = userRepo;
+            _tokenService = tokenService;
         }
         public async Task<string> Login(Credentials credentials)
         {
@@ -23,7 +25,7 @@ namespace FakeStoreInc.Business.src.Service
             var isPasswordMatch = PasswordService.VerifyPassword(credentials.Password, foundByEmail.Password, foundByEmail.Salt);
             if(isPasswordMatch)
             {
-                return "";
+                return _tokenService.GenerateToken(foundByEmail);
             }
             throw new Exception("Not found");
         }

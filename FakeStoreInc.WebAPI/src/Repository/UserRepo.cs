@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.Core.src.Entity.User;
-using FakeStoreInc.Core.src.Parameter;
+using FakeStoreInc.Core.src.Shared;
 using FakeStoreInc.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +27,7 @@ namespace FakeStoreInc.WebAPI.src.Repository
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<User> GetAll(GetAllParams options)
+        public IEnumerable<User> GetAll(GetAllOptions options)
         {
             return _users.Where(u => u.FirstName.Contains(options.Search)).Skip(options.Offset).Take(options.Limit);
         }
