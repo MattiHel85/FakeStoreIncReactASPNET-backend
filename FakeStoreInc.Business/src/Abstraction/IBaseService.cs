@@ -9,6 +9,6 @@ namespace FakeStoreInc.Business.src.Abstraction
         Task<TReadDto> GetByIdAsync(Guid id);
         Task<bool> UpdateOneAsync(Guid id, TUpdateDto updateObject);
         Task<bool> DeleteOneAsync(Guid id);
-        Task<TReadDto> CreateOne(TCreateDto createObject);
+        Task<TReadDto> CreateOneAsync(TCreateDto createObject);
     }
 }

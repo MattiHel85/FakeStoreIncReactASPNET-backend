@@ -17,7 +17,7 @@ namespace FakeStoreInc.Business.src.Service
             _repo = repo;
             _mapper = mapper;
         }
-       public virtual async Task<TReadDto> CreateOne(TCreateDto createObject)
+       public virtual async Task<TReadDto> CreateOneAsync(TCreateDto createObject)
        {
             return _mapper.Map<T, TReadDto>(await _repo.CreateOneAsync(_mapper.Map<TCreateDto, T>(createObject)));
        }
@@ -40,6 +40,5 @@ namespace FakeStoreInc.Business.src.Service
        {
             throw new NotImplementedException();
        }
-
     }
 }

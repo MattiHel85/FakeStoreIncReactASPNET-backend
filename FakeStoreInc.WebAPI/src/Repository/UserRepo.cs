@@ -17,25 +17,29 @@ namespace FakeStoreInc.WebAPI.src.Repository
             _database = database;
 
         }
-        public User CreateOne(User user)
+        public User CreateOneAsync(User user)
         {
             _users.Add(user);
             _database.SaveChanges();
             return user;
         }
-        public bool DeleteOne(Guid id)
+        public bool DeleteOneAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<User> GetAll(GetAllOptions options)
+        public IEnumerable<User> GetAllAsync(GetAllOptions options)
         {
             return _users.Where(u => u.FirstName.Contains(options.Search)).Skip(options.Offset).Take(options.Limit);
         }
-        public User GetOneById(Guid id)
+        public User GetOneByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-        public User UpdateOne(User user)
+        public User UpdateOneAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+        public User UpdatePasswordAsync(User user)
         {
             throw new NotImplementedException();
         }
