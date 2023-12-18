@@ -26,7 +26,7 @@ namespace FakeStoreInc.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Default"));
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Local"));
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder
@@ -38,6 +38,7 @@ namespace FakeStoreInc.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
+            // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
         }
     }
 }

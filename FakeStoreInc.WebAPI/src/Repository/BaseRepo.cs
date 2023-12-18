@@ -35,7 +35,7 @@ namespace FakeStoreInc.WebAPI.src.Repository
 
         public async Task<IEnumerable<T>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            return  await _data.Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+            return  await _data.AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
 
         public async Task<T?> GetByIdAsync(Guid id)

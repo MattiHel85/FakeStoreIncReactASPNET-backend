@@ -1,12 +1,12 @@
 using FakeStoreInc.Core.src.Entity.Category;
-using FakeStoreInc.Core.src.Parameter;
+using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
     public interface ICategoryRepo
     {
 
-        IEnumerable<Category> GetAll(GetAllParams options);
+        IEnumerable<Category> GetAll(GetAllOptions options);
 
         Category GetOneById(Guid id);
         Category CreateOne(Category category);

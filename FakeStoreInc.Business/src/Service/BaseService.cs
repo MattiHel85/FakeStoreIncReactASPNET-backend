@@ -1,7 +1,9 @@
 using AutoMapper;
 using FakeStoreInc.Business.src.Abstraction;
+using FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.Core.src.Entity;
+using FakeStoreInc.Core.src.Entity.User;
 using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Service
@@ -26,9 +28,10 @@ namespace FakeStoreInc.Business.src.Service
             throw new NotImplementedException();
        }
 
-       public virtual Task<IEnumerable<TReadDto>> GetAllAsync(GetAllOptions getAllOptions)
+       public virtual async Task<IEnumerable<TReadDto>> GetAllAsync(GetAllOptions getAllOptions)
        {
-            throw new NotImplementedException();
+          var result = await _repo.GetAllAsync(getAllOptions);
+          return _mapper.Map<IEnumerable<T>, IEnumerable<TReadDto>>(result);
        }
 
        public virtual Task<TReadDto> GetByIdAsync(Guid id)

@@ -4,6 +4,7 @@ using FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Service
 {
@@ -14,12 +15,20 @@ namespace FakeStoreInc.Business.src.Service
         
         }
 
-        public Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
+        public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
-            throw new NotImplementedException();
+            var user = await _repo.GetByIdAsync(userId);
+            if(user is null)
+            {
+                throw new Exception();
+            }
+            PasswordService.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+            return await _repo.UpdateOneAsync(user);
         }
 
-        public override async Task<UserReadDTO> CreateOne(UserCreateDTO createObject)
+        public override async Task<UserReadDTO> CreateOneAsync(UserCreateDTO createObject)
         {
             PasswordService.HashPassword(createObject.Password, out string hashedPassword, out byte[] salt);
             var user = _mapper.Map<UserCreateDTO, User>(createObject);
@@ -27,5 +36,11 @@ namespace FakeStoreInc.Business.src.Service
             user.Salt = salt;
             return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
         }
+
+        // public async Task<GetAllUserDTO> AnotherGetAll(GetAllOptions getAllOptions)
+        // {
+        //     var users = _repo.GetAllAsync(getAllOptions);
+        //     var pages = 0; // _repo.GetTotal() / getAllOptions.Limit;
+        // }
     }
 }
