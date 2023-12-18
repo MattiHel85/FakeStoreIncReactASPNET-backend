@@ -1,14 +1,10 @@
 using FakeStoreInc.Core.src.Entity.User;
-using FakeStoreInc.Core.src.Parameter;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
-    public interface IUserRepo
+    public interface IUserRepo : IBaseRepo<User>
     {
-        IEnumerable<User> GetAll(GetAllParams options);
-        User GetOneById(Guid id);
-        User CreateOne(User user);
-        User UpdateOne(User user);
-        bool DeleteOne(Guid id);
+        // Task<bool> UpdatePasswordAsync(string newPassword, Guid userId);
+        Task<User?> FindByEmailAsync(string Email);
     }
 }

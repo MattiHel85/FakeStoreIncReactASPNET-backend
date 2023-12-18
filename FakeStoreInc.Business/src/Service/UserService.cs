@@ -1,65 +1,46 @@
 using AutoMapper;
 using FakeStoreInc.Business.src.Abstraction;
 using FakeStoreInc.Business.src.DTO;
+using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Abstraction;
-using FakeStoreInc.Core.src.Parameter;
 using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Service
 {
-    public class UserService : IUserService
+    public class UserService : BaseService<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>, IUserService
     {
-        private IUserRepo _userRepo;
-        private IMapper _mapper;
-
-        public UserService(IUserRepo userRepo, IMapper mapper)
+        public UserService(IUserRepo repo, IMapper mapper) :base(repo, mapper)
         {
-            _userRepo = userRepo;
-            _mapper = mapper;
+        
         }
 
-        public UserReadDTO CreateOne(UserCreateDTO userCreateDto)
+        public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
-            var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDto));
-            // var result = _use;
-            // var userReadDto = new UserReadDTO();
-            // return userReadDto.Convert(result);
-            return _mapper.Map<User, UserReadDTO>(result);
-        }
-        public bool DeleteOne(Guid id)
-        {
-            var deletedSuccessfully = _userRepo.DeleteOne(id);
-            return deletedSuccessfully;
-        }
-
-        public IEnumerable<UserReadDTO> GetAll(GetAllParams options)
-        {
-            // return _userRepo.GetAll(options).Select(u => new UserReadDTO().Convert(u));
-            var result = _userRepo.GetAll(options);
-            return _mapper.Map<IEnumerable<User>,IEnumerable<UserReadDTO>>(result);
+            var user = await _repo.GetByIdAsync(userId);
+            if(user is null)
+            {
+                throw new Exception();
+            }
+            PasswordService.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+            return await _repo.UpdateOneAsync(user);
         }
 
-        public UserReadDTO GetOneById(Guid id)
+        public override async Task<UserReadDTO> CreateOneAsync(UserCreateDTO createObject)
         {
-            throw new NotImplementedException();
-            // var user = _userRepo.GetOneById(id);
-
-            // if (user == null)
-            // {
-            //     throw new NotImplementedException($"User with ID {id} not found");
-            // }
-
-            // var userReadDto = new UserReadDTO();
-            // return userReadDto.Convert(user);
+            PasswordService.HashPassword(createObject.Password, out string hashedPassword, out byte[] salt);
+            var user = _mapper.Map<UserCreateDTO, User>(createObject);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+            return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
         }
 
-        public UserReadDTO UpdateOne(UserUpdateDTO userUpdateDto)
-        {
-            throw new NotImplementedException();
-            // var result = _userRepo.UpdateOne(userUpdateDto.Transform());
-            // var userReadDto = new UserReadDTO();
-            // return userReadDto.Convert(result);
-        }
-
+        // public async Task<GetAllUserDTO> AnotherGetAll(GetAllOptions getAllOptions)
+        // {
+        //     var users = _repo.GetAllAsync(getAllOptions);
+        //     var pages = 0; // _repo.GetTotal() / getAllOptions.Limit;
+        // }
     }
 }

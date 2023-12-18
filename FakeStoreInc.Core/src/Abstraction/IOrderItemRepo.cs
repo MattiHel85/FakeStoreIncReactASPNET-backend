@@ -1,11 +1,11 @@
 using FakeStoreInc.Core.src.Entity.OrderItem;
-using FakeStoreInc.Core.src.Parameter;
+using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
     public interface IOrderItemRepo
     {
-        IEnumerable<OrderItem> GetAll(GetAllParams options);
+        IEnumerable<OrderItem> GetAll(GetAllOptions options);
 
         OrderItem GetOneById(Guid id);
         void CreateOne(OrderItem orderItem);

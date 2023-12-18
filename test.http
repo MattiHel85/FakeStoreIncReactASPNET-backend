@@ -6,6 +6,10 @@ Content-Type: application/json
     "lastName": "Doe",
     "email": "john.doe@example.com",
     "password": "securepassword",
-    "address": "123 Main St",
+    "addresses": {
+        "houseNumber": 28,
+        "street": "Skeet Street",
+        "postCode": "M9 4FY"
+    },
     "phoneNumber": "+123456789"
 }
