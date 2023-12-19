@@ -38,7 +38,6 @@ namespace FakeStoreInc.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
-            // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
         }
     }
 }
