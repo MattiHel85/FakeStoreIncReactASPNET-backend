@@ -11,10 +11,13 @@ namespace FakeStoreInc.Business.src.Shared
         {
             // CreateMap<User, UserReadDTO>().ForMember(dest => dest.FirstName, option => option.MapFrom(source => source.FirstName.ToLower()));
             CreateMap<User, UserReadDTO>();
-            CreateMap<UserUpdateDTO, User>();
+            // CreateMap<UserUpdateDTO, User>();
             CreateMap<UserCreateDTO, User>();
+            CreateMap<UserUpdateDTO, User>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
             
             CreateMap<Address, AddressReadDTO>();
+            CreateMap<AddressCreateDTO, Address>();
+            CreateMap<AddressUpdateDTO, Address>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
         }
     }
 }
