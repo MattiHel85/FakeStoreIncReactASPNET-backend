@@ -1,10 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
 using FakeStoreInc.Core.src.Entity;
-using FakeStoreInc.Core.src.Entity.Category;
-using FakeStoreInc.Core.src.Entity.Order;
-using FakeStoreInc.Core.src.Entity.OrderItem;
-using FakeStoreInc.Core.src.Entity.Product;
-using FakeStoreInc.Core.src.Entity.User;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
@@ -38,6 +33,28 @@ namespace FakeStoreInc.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId);
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId);
+            modelBuilder.Entity<Category>()
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Category);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Addresses)
+                .WithOne(a => a.User)
+                .HasForeignKey(a => a.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

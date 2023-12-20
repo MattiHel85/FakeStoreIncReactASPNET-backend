@@ -1,4 +1,4 @@
-namespace FakeStoreInc.Core.src.Entity.Product
+namespace FakeStoreInc.Core.src.Entity
 {
     public class Product : BaseEntity
     {
@@ -7,6 +7,8 @@ namespace FakeStoreInc.Core.src.Entity.Product
         public string? Image { get; set; }
         public string? Price { get; set; }
         public int StockQuantity { get; set; }
-        public int CategoryId { get; set;}
+        public Guid CategoryId { get; set;}
+        public Category? Category { get; set;}
+        public ICollection<OrderItem>? OrderItems { get; set;}
     }
 }

@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using FakeStoreInc.Business.src.Abstraction;
-using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Entity;
 using Microsoft.IdentityModel.Tokens;
 
 namespace FakeStoreInc.WebAPI.src.Service

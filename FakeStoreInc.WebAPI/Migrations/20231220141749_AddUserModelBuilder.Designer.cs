@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FakeStoreInc.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231219104750_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231220141749_AddUserModelBuilder")]
+    partial class AddUserModelBuilder
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -66,7 +66,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                     b.ToTable("addresses", (string)null);
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Category.Category", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,7 +95,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order.Order", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,8 +106,8 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<string>("OrderDate")
-                        .HasColumnType("text")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("order_date");
 
                     b.Property<int>("OrderStatus")
@@ -122,17 +122,20 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
                         .HasName("pk_orders");
 
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_orders_user_id");
+
                     b.ToTable("orders", (string)null);
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.OrderItem.OrderItem", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,20 +146,20 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
-                    b.Property<int>("OrderItemId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("OrderItemId")
+                        .HasColumnType("uuid")
                         .HasColumnName("order_item_id");
 
                     b.Property<decimal>("PaymentMethod")
                         .HasColumnType("numeric")
                         .HasColumnName("payment_method");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
                         .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
@@ -170,18 +173,24 @@ namespace FakeStoreInc.WebAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_order_items");
 
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_order_items_order_id");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_order_items_product_id");
+
                     b.ToTable("order_items", (string)null);
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product.Product", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<DateTime>("CreatedDate")
@@ -215,10 +224,13 @@ namespace FakeStoreInc.WebAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_products");
 
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_products_category_id");
+
                     b.ToTable("products", (string)null);
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.User.User", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -269,15 +281,81 @@ namespace FakeStoreInc.WebAPI.Migrations
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>
                 {
-                    b.HasOne("FakeStoreInc.Core.src.Entity.User.User", null)
+                    b.HasOne("FakeStoreInc.Core.src.Entity.User", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_addresses_users_user_id");
+
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.User.User", b =>
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order", b =>
+                {
+                    b.HasOne("FakeStoreInc.Core.src.Entity.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_orders_users_user_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.OrderItem", b =>
+                {
+                    b.HasOne("FakeStoreInc.Core.src.Entity.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_order_items_orders_order_id");
+
+                    b.HasOne("FakeStoreInc.Core.src.Entity.Product", "Product")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_order_items_products_product_id");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product", b =>
+                {
+                    b.HasOne("FakeStoreInc.Core.src.Entity.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_products_categories_category_id");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("FakeStoreInc.Core.src.Entity.User", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

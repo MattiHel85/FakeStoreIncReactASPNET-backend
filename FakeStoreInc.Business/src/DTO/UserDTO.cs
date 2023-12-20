@@ -1,5 +1,4 @@
 using FakeStoreInc.Core.src.Entity;
-using FakeStoreInc.Core.src.Entity.User;
 
 namespace FakeStoreInc.Business.src.DTO
 {
@@ -10,7 +9,7 @@ namespace FakeStoreInc.Business.src.DTO
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public IEnumerable<AddressReadDTO> Addresses { get; set; }
+        public IEnumerable<AddressReadDTO>? Addresses { get; set; }
 
     }
     public class UserUpdateDTO

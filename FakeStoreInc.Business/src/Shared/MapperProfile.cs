@@ -1,7 +1,6 @@
 using AutoMapper;
 using FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Core.src.Entity;
-using FakeStoreInc.Core.src.Entity.User;
 
 namespace FakeStoreInc.Business.src.Shared
 {

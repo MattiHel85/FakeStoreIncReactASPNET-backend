@@ -1,4 +1,4 @@
-using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Entity;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
