@@ -1,11 +1,13 @@
-namespace FakeStoreInc.Core.src.Entity.Order
+namespace FakeStoreInc.Core.src.Entity
 {
     public class Order : BaseEntity
     {
-        public string? OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public Status OrderStatus { get; set;}
         public string? PaymentMethod { get; set; }
-        public int UserId { get; set;}
+        public Guid UserId { get; set;}
+        public User? User { get; set;}
+        public ICollection<OrderItem>? OrderItems { get; set;}
     }
 
     public enum Status

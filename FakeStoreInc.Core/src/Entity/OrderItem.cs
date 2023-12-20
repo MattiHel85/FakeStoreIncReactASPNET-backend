@@ -1,11 +1,13 @@
-namespace FakeStoreInc.Core.src.Entity.OrderItem
+namespace FakeStoreInc.Core.src.Entity
 {
     public class OrderItem : BaseEntity
     {
-        public int OrderItemId { get; set; }
+        public Guid OrderItemId { get; set; }
         public int Quantity { get; set; }
         public decimal PaymentMethod { get; set; }
-        public int OrderId { get; set;}
-        public int ProductId { get; set;}
+        public Guid OrderId { get; set;}
+        public Order? Order { get; set;}
+        public Guid ProductId { get; set;}
+        public Product? Product { get; set;}
     }
 }

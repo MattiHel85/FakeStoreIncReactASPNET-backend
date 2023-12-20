@@ -3,7 +3,7 @@ using FakeStoreInc.Business.src.Abstraction;
 using FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Abstraction;
-using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Entity;
 using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Service

@@ -24,11 +24,20 @@ namespace FakeStoreInc.WebAPI.src.Repository
 
         public async Task<bool> DeleteOneAsync(T DeleteObject)
         {
-            if(await _data.FindAsync(DeleteObject) is null)
+            var existingEntity = await _data.FindAsync(DeleteObject.Id);
+
+            if (existingEntity == null)
             {
                 return false;
             }
-            _data.Remove(DeleteObject);
+
+            // var addresses = await _addressRepo.GetAddressesByUserIdAsync(userId);
+            // foreach (var address in addresses)
+            // {
+            //     await _addressRepo.DeleteOneAsync(address);
+            // }
+
+            _data.Remove(existingEntity);
             await _databaseContext.SaveChangesAsync();
             return true;
         }
@@ -45,11 +54,13 @@ namespace FakeStoreInc.WebAPI.src.Repository
 
         public async Task<bool> UpdateOneAsync(T updateObject)
         {
-            if(await _data.FindAsync(updateObject) is null)
+            var existingEntity = await _data.FindAsync(updateObject.Id);
+            
+            if (existingEntity == null)
             {
                 return false;
             }
-            _data.Update(updateObject);
+            _data.Update(existingEntity);
             await _databaseContext.SaveChangesAsync();
             return true;
         }

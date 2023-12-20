@@ -16,3 +16,18 @@ Content-Type: application/json
     }
   ]
 }
+# {
+#   "Role": "Customer",
+#   "FirstName": "Jane",
+#   "LastName": "Doe",
+#   "Email": "jane.doe@example.com",
+#   "Password": "password123",
+#   "PhoneNumber": "9876543210",
+#   "Addresses": [
+#     {
+#       "HouseNumber": 456,
+#       "Street": "Oak Avenue",
+#       "PostCode": "67890"
+#     }
+#   ]
+# }

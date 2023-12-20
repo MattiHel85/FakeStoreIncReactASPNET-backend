@@ -3,6 +3,7 @@ using System;
 using FakeStoreInc.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FakeStoreInc.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231220132401_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +53,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -278,14 +281,10 @@ namespace FakeStoreInc.WebAPI.Migrations
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>
                 {
-                    b.HasOne("FakeStoreInc.Core.src.Entity.User", "User")
+                    b.HasOne("FakeStoreInc.Core.src.Entity.User", null)
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_addresses_users_user_id");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order", b =>

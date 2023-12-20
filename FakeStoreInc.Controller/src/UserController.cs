@@ -1,6 +1,6 @@
 using FakeStoreInc.Business.src.Abstraction;
 using FakeStoreInc.Business.src.DTO;
-using FakeStoreInc.Core.src.Entity.User;
+using FakeStoreInc.Core.src.Entity;
 
 namespace FakeStoreInc.Controller.src
 {
