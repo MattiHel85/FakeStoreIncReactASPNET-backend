@@ -53,6 +53,8 @@ namespace FakeStoreInc.Business.src.Service
             }
 
             _mapper.Map(updateObject, entity);
+
+            entity.UpdatedDate = DateTime.UtcNow;
             return await _repo.UpdateOneAsync(entity);
        }
     }
