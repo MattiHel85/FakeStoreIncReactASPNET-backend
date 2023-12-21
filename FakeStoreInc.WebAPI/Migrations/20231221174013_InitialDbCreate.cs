@@ -61,6 +61,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                     price = table.Column<string>(type: "text", nullable: true),
                     stock_quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    category_id1 = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -73,6 +74,11 @@ namespace FakeStoreInc.WebAPI.Migrations
                         principalTable: "categories",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_products_categories_category_id1",
+                        column: x => x.category_id1,
+                        principalTable: "categories",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -103,7 +109,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     order_status = table.Column<int>(type: "integer", nullable: false),
                     payment_method = table.Column<string>(type: "text", nullable: true),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -126,7 +131,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_item_id = table.Column<Guid>(type: "uuid", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     payment_method = table.Column<decimal>(type: "numeric", nullable: false),
                     order_id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -175,6 +179,11 @@ namespace FakeStoreInc.WebAPI.Migrations
                 name: "ix_products_category_id",
                 table: "products",
                 column: "category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_products_category_id1",
+                table: "products",
+                column: "category_id1");
         }
 
         /// <inheritdoc />

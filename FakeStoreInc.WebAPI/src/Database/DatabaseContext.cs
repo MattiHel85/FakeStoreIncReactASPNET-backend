@@ -34,29 +34,23 @@ namespace FakeStoreInc.WebAPI.src.Database
         {
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.User)
-                .WithMany(u => u.Orders)
-                .HasForeignKey(o => o.UserId);
+                .HasMany(o => o.OrderItems)
+                .WithOne()
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
-                .WithMany(c => c.Products)
-                .HasForeignKey(p => p.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany()
+                .HasForeignKey(p => p.CategoryId);
             modelBuilder.Entity<OrderItem>()
-                .HasOne(oi => oi.Order)
+                .HasOne<Order>()
                 .WithMany(o => o.OrderItems)
                 .HasForeignKey(oi => oi.OrderId);
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.Products)
-                .WithOne(p => p.Category);
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Addresses)
                 .WithOne(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.Products)
-                .WithOne(p => p.Category);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -24,6 +24,14 @@ namespace FakeStoreInc.Business.src.Shared
             CreateMap<Category, CategoryReadDTO>();
             CreateMap<CategoryCreateDTO, Category>();
             CreateMap<CategoryUpdateDTO, Category>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
+            
+            CreateMap<Order, OrderReadDTO>();
+            CreateMap<OrderCreateDTO, Order>();
+            CreateMap<OrderUpdateDTO, Order>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
+            
+            CreateMap<OrderItem, OrderItemReadDTO>();
+            CreateMap<OrderItemCreateDTO, OrderItem>();
+            CreateMap<OrderItemUpdateDTO, OrderItem>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
         }
     }
 }
