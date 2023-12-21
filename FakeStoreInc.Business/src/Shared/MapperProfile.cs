@@ -1,5 +1,6 @@
 using AutoMapper;
 using FakeStoreInc.Business.src.DTO;
+using FakeStoreInc.Business.src.DTO.FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Core.src.Entity;
 
 namespace FakeStoreInc.Business.src.Shared
@@ -8,15 +9,21 @@ namespace FakeStoreInc.Business.src.Shared
     {
         public MapperProfile()
         {
-            // CreateMap<User, UserReadDTO>().ForMember(dest => dest.FirstName, option => option.MapFrom(source => source.FirstName.ToLower()));
             CreateMap<User, UserReadDTO>();
-            // CreateMap<UserUpdateDTO, User>();
             CreateMap<UserCreateDTO, User>();
             CreateMap<UserUpdateDTO, User>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
             
             CreateMap<Address, AddressReadDTO>();
             CreateMap<AddressCreateDTO, Address>();
             CreateMap<AddressUpdateDTO, Address>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
+
+            CreateMap<Product, ProductReadDTO>();
+            CreateMap<ProductCreateDTO, Product>();
+            CreateMap<ProductUpdateDTO, Product>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
+
+            CreateMap<Category, CategoryReadDTO>();
+            CreateMap<CategoryCreateDTO, Category>();
+            CreateMap<CategoryUpdateDTO, Category>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using FakeStoreInc.Core.src.Entity;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FakeStoreInc.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialDbCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,10 +20,10 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    categoryname = table.Column<string>(name: "category_name", type: "text", nullable: true),
+                    category_name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,15 +35,15 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    role = table.Column<int>(type: "integer", nullable: false),
-                    firstname = table.Column<string>(name: "first_name", type: "text", nullable: true),
-                    lastname = table.Column<string>(name: "last_name", type: "text", nullable: true),
+                    role = table.Column<Role>(type: "role", nullable: false),
+                    first_name = table.Column<string>(type: "text", nullable: true),
+                    last_name = table.Column<string>(type: "text", nullable: true),
                     email = table.Column<string>(type: "text", nullable: true),
                     password = table.Column<string>(type: "text", nullable: true),
-                    phonenumber = table.Column<string>(name: "phone_number", type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
                     salt = table.Column<byte[]>(type: "bytea", nullable: true),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,21 +55,21 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    productname = table.Column<string>(name: "product_name", type: "text", nullable: true),
+                    product_name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     image = table.Column<string>(type: "text", nullable: true),
                     price = table.Column<string>(type: "text", nullable: true),
-                    stockquantity = table.Column<int>(name: "stock_quantity", type: "integer", nullable: false),
-                    categoryid = table.Column<Guid>(name: "category_id", type: "uuid", nullable: false),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    stock_quantity = table.Column<int>(type: "integer", nullable: false),
+                    category_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_products", x => x.id);
                     table.ForeignKey(
                         name: "fk_products_categories_category_id",
-                        column: x => x.categoryid,
+                        column: x => x.category_id,
                         principalTable: "categories",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -79,21 +80,22 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    housenumber = table.Column<int>(name: "house_number", type: "integer", nullable: false),
+                    house_number = table.Column<int>(type: "integer", nullable: false),
                     street = table.Column<string>(type: "text", nullable: true),
-                    postcode = table.Column<string>(name: "post_code", type: "text", nullable: true),
-                    userid = table.Column<Guid>(name: "user_id", type: "uuid", nullable: true),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    post_code = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_addresses", x => x.id);
                     table.ForeignKey(
                         name: "fk_addresses_users_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalTable: "users",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,19 +103,19 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    orderdate = table.Column<DateTime>(name: "order_date", type: "timestamp with time zone", nullable: false),
-                    orderstatus = table.Column<int>(name: "order_status", type: "integer", nullable: false),
-                    paymentmethod = table.Column<string>(name: "payment_method", type: "text", nullable: true),
-                    userid = table.Column<Guid>(name: "user_id", type: "uuid", nullable: false),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    order_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    order_status = table.Column<int>(type: "integer", nullable: false),
+                    payment_method = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_orders", x => x.id);
                     table.ForeignKey(
                         name: "fk_orders_users_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -124,26 +126,26 @@ namespace FakeStoreInc.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    orderitemid = table.Column<Guid>(name: "order_item_id", type: "uuid", nullable: false),
+                    order_item_id = table.Column<Guid>(type: "uuid", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
-                    paymentmethod = table.Column<decimal>(name: "payment_method", type: "numeric", nullable: false),
-                    orderid = table.Column<Guid>(name: "order_id", type: "uuid", nullable: false),
-                    productid = table.Column<Guid>(name: "product_id", type: "uuid", nullable: false),
-                    createddate = table.Column<DateTime>(name: "created_date", type: "timestamp with time zone", nullable: false),
-                    updateddate = table.Column<DateTime>(name: "updated_date", type: "timestamp with time zone", nullable: false)
+                    payment_method = table.Column<decimal>(type: "numeric", nullable: false),
+                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_order_items", x => x.id);
                     table.ForeignKey(
                         name: "fk_order_items_orders_order_id",
-                        column: x => x.orderid,
+                        column: x => x.order_id,
                         principalTable: "orders",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_order_items_products_product_id",
-                        column: x => x.productid,
+                        column: x => x.product_id,
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);

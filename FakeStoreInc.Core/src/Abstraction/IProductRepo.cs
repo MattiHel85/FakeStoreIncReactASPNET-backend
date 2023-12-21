@@ -1,14 +1,9 @@
 using FakeStoreInc.Core.src.Entity;
-using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Core.src.Abstraction
 {
-    public interface IProductRepo
+    public interface IProductRepo : IBaseRepo<Product>
     {
-        IEnumerable<Product> GetAll(GetAllOptions options);
-        Product GetOneByID(Guid id);
-        Product CreateOne(Product product);
-        Product UpdateOne(Product product);
-        bool DeleteOne(Guid id);
+       
     }
 }

@@ -16,6 +16,7 @@ Content-Type: application/json
     }
   ]
 }
+
 # {
 #   "Role": "Customer",
 #   "FirstName": "Jane",
@@ -31,3 +32,20 @@ Content-Type: application/json
 #     }
 #   ]
 # }
+
+# {
+#   "productName": "Dummy Product",
+#   "description": "This is a dummy product description.",
+#   "image": "dummy_image.jpg",
+#   "price": "29.99",
+#   "stockQuantity": 100,
+#   "categoryId": "81465c2f-4cb1-4b07-959e-4564db48cf23"
+# }
+
+# {
+#   "categoryName": "Dummy Category",
+#   "description": "This is a dummy category",
+#   "products": []
+# }
+
+
