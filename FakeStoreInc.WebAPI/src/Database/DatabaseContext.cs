@@ -33,24 +33,27 @@ namespace FakeStoreInc.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.OrderItems)
-                .WithOne()
-                .HasForeignKey(oi => oi.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.Category)
-                .WithMany()
-                .HasForeignKey(p => p.CategoryId);
-            modelBuilder.Entity<OrderItem>()
-                .HasOne<Order>()
-                .WithMany(o => o.OrderItems)
-                .HasForeignKey(oi => oi.OrderId);
-            modelBuilder.Entity<User>()
-                .HasMany(u => u.Addresses)
-                .WithOne(a => a.User)
-                .HasForeignKey(a => a.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            
+            modelBuilder.HasPostgresEnum<Status>();
+            // modelBuilder.Entity<Order>()
+            //     .HasMany(o => o.OrderItems)
+            //     .WithOne()
+            //     .HasForeignKey(oi => oi.OrderId)
+            //     .OnDelete(DeleteBehavior.Cascade);
+            // modelBuilder.Entity<Product>()
+            //     .HasOne(p => p.Category)
+            //     .WithMany()
+            //     .HasForeignKey(p => p.CategoryId);
+            // modelBuilder.Entity<OrderItem>()
+            //     .HasOne<Order>()
+            //     .WithMany(o => o.OrderItems)
+            //     .HasForeignKey(oi => oi.OrderId);
+            // modelBuilder.Entity<User>()
+            //     .HasMany(u => u.Addresses)
+            //     .WithOne(a => a.UserId)
+            //     .HasForeignKey(a => a.UserId)
+            //     .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }

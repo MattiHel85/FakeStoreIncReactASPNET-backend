@@ -1,6 +1,7 @@
 using FakeStoreInc.Business.src.Abstraction;
 using FakeStoreInc.Core.src.Entity;
 using FakeStoreInc.Core.src.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -26,6 +27,7 @@ namespace FakeStoreInc.Controller.src
         {
             return Ok(await _service.DeleteOneAsync(id));
         }
+        [Authorize]
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<TReadDto>>> GetAllAsync([FromQuery]GetAllOptions getAllOptions)
         {

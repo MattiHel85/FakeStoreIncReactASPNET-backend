@@ -17,6 +17,17 @@ namespace FakeStoreInc.WebAPI.src.Repository
             return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
 
+        public override async Task<IEnumerable<User>> GetAllAsync(GetAllOptions options)
+        {
+          var result = await _data
+            .Include(u => u.Addresses)
+            .OrderBy(entity => entity.Id)
+            .Skip(options.Offset)
+            .Take(options.Limit)
+            .ToArrayAsync();
+          return result;
+        }
+
         // public Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         // {
         //     throw new NotImplementedException();

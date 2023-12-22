@@ -18,23 +18,29 @@ namespace FakeStoreInc.WebAPI.src.Service
         }
         public string GenerateToken(User user)
         {
-            var issuer = _config.GetSection("jwt:Issuer").Value;
-            var claims = new List<Claim>{
+            var issuer = _config.GetSection("Jwt:Issuer").Value;
+            var audience = _config.GetSection("Jwt:Audience").Value;
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value!));
+            
+            var claims = new List<Claim>
+            {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
             };
-            var audience = _config.GetSection("Jwt:Audience").Value;
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value!));
+            // var audience = _config.GetSection("Jwt:Audience").Value;
+            // var tokenHandler = new JwtSecurityTokenHandler();
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value!));
             var signingKey = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+            
             var descriptor = new SecurityTokenDescriptor
             {
                 Issuer = issuer,
                 Audience = audience,
-                Expires = DateTime.Now.AddDays(2),
+                Expires = DateTime.UtcNow.AddDays(2),
                 Subject = new ClaimsIdentity(claims),
                 SigningCredentials = signingKey
             };
+            var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(descriptor);
             return tokenHandler.WriteToken(token);
         }
