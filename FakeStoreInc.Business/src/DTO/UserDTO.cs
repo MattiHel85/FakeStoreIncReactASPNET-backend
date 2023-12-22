@@ -18,6 +18,7 @@ namespace FakeStoreInc.Business.src.DTO
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public IEnumerable<AddressUpdateDTO>? Addresses { get; set; }
     }
     public class UserCreateDTO
     {

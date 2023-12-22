@@ -9,10 +9,17 @@ namespace FakeStoreInc.Business.src.Shared
     {
         public MapperProfile()
         {
-            CreateMap<User, UserReadDTO>();
-            CreateMap<UserCreateDTO, User>();
+            CreateMap<User, UserReadDTO>()
+                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(s => s.Addresses));
+            CreateMap<UserCreateDTO, User>()
+                .ForMember(dest => dest.Addresses, opt => opt.MapFrom(s => s.Addresses));
             CreateMap<UserUpdateDTO, User>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
-            
+
+            // CreateMap<ProductCreateDTO, Product>()
+            // .ForMember(dest => dest.Category, opt => opt.Ignore())
+            // .ForMember(dest => dest.ProductDetails, opt => opt.MapFrom(s => s.ProductDetails))
+            // .ForMember(dest => dest.ProductImages, opt => opt.MapFrom(s => s.ProductImages));
+
             CreateMap<Address, AddressReadDTO>();
             CreateMap<AddressCreateDTO, Address>();
             CreateMap<AddressUpdateDTO, Address>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));

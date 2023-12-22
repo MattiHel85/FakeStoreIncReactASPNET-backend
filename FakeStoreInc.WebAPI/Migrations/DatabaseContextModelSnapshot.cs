@@ -22,6 +22,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "customer" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "status", new[] { "pending", "processing", "shipped", "delivered", "cancelled" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>
@@ -51,7 +52,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -183,10 +184,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
-                    b.Property<Guid?>("CategoryId1")
-                        .HasColumnType("uuid")
-                        .HasColumnName("category_id1");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
@@ -220,9 +217,6 @@ namespace FakeStoreInc.WebAPI.Migrations
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_products_category_id");
-
-                    b.HasIndex("CategoryId1")
-                        .HasDatabaseName("ix_products_category_id1");
 
                     b.ToTable("products", (string)null);
                 });
@@ -278,14 +272,10 @@ namespace FakeStoreInc.WebAPI.Migrations
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>
                 {
-                    b.HasOne("FakeStoreInc.Core.src.Entity.User", "User")
+                    b.HasOne("FakeStoreInc.Core.src.Entity.User", null)
                         .WithMany("Addresses")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_addresses_users_user_id");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Order", b =>
@@ -318,16 +308,11 @@ namespace FakeStoreInc.WebAPI.Migrations
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product", b =>
                 {
                     b.HasOne("FakeStoreInc.Core.src.Entity.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_products_categories_category_id");
-
-                    b.HasOne("FakeStoreInc.Core.src.Entity.Category", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId1")
-                        .HasConstraintName("fk_products_categories_category_id1");
 
                     b.Navigation("Category");
                 });

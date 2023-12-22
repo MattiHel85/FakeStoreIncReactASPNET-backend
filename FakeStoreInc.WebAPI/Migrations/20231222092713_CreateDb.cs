@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FakeStoreInc.WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDbCreate : Migration
+    public partial class CreateDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:Enum:role", "admin,customer");
+                .Annotation("Npgsql:Enum:role", "admin,customer")
+                .Annotation("Npgsql:Enum:status", "pending,processing,shipped,delivered,cancelled");
 
             migrationBuilder.CreateTable(
                 name: "categories",
@@ -61,7 +62,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                     price = table.Column<string>(type: "text", nullable: true),
                     stock_quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    category_id1 = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -74,11 +74,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                         principalTable: "categories",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_products_categories_category_id1",
-                        column: x => x.category_id1,
-                        principalTable: "categories",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -89,7 +84,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                     house_number = table.Column<int>(type: "integer", nullable: false),
                     street = table.Column<string>(type: "text", nullable: true),
                     post_code = table.Column<string>(type: "text", nullable: true),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -100,8 +95,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         name: "fk_addresses_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -179,11 +173,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 name: "ix_products_category_id",
                 table: "products",
                 column: "category_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_products_category_id1",
-                table: "products",
-                column: "category_id1");
         }
 
         /// <inheritdoc />

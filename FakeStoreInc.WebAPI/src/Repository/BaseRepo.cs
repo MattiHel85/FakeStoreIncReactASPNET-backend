@@ -42,7 +42,7 @@ namespace FakeStoreInc.WebAPI.src.Repository
             return true;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(GetAllOptions getAllOptions)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(GetAllOptions getAllOptions)
         {
             return  await _data.AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
