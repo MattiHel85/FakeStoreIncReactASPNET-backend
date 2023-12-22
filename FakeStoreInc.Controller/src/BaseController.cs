@@ -22,22 +22,26 @@ namespace FakeStoreInc.Controller.src
         {
             return CreatedAtAction(nameof(CreateOneAsync),await _service.CreateOneAsync(createObject));
         }
+        // [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "CheckUser")]
         [HttpDelete("{id:guid}")]
         public virtual async Task<ActionResult<bool>> DeleteOneAsync([FromRoute]Guid id)
         {
             return Ok(await _service.DeleteOneAsync(id));
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<TReadDto>>> GetAllAsync([FromQuery]GetAllOptions getAllOptions)
         {
             return Ok(await _service.GetAllAsync(getAllOptions));
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<TReadDto>> GetByIdAsync([FromRoute]Guid id)
         {
             return Ok(await _service.GetByIdAsync(id));
         }
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{id:guid}")]
         public virtual async Task<ActionResult<bool>> UpdateOneAsync([FromRoute]Guid id, [FromBody]TUpdateDto updateObject)
         {

@@ -32,6 +32,7 @@ namespace FakeStoreInc.Business.src.Service
         {            
             PasswordService.HashPassword(createObject.Password, out string hashedPassword, out byte[] salt);
             var user = _mapper.Map<UserCreateDTO, User>(createObject);
+            // Console.WriteLine(createObject.Addresses);
             user.Password = hashedPassword;
             user.Salt = salt;
             return _mapper.Map<User?, UserReadDTO>(await _repo.CreateOneAsync(user));
