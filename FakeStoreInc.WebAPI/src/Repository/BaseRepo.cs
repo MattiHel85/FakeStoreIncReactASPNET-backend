@@ -31,12 +31,6 @@ namespace FakeStoreInc.WebAPI.src.Repository
                 return false;
             }
 
-            // var addresses = await _addressRepo.GetAddressesByUserIdAsync(userId);
-            // foreach (var address in addresses)
-            // {
-            //     await _addressRepo.DeleteOneAsync(address);
-            // }
-
             _data.Remove(existingEntity);
             await _databaseContext.SaveChangesAsync();
             return true;

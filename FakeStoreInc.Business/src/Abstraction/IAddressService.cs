@@ -7,6 +7,8 @@ using FakeStoreInc.Core.src.Entity;
 
 namespace FakeStoreInc.Business.src.Abstraction
 {
-    public interface IOrderItemService :IBaseService<OrderItem, OrderItemReadDTO, OrderItemCreateDTO, OrderItemUpdateDTO>
-    {}
+    public interface IAddressService : IBaseService<Address, AddressReadDTO, AddressCreateDTO, AddressUpdateDTO>
+    {
+        
+    }
 }

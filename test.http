@@ -1,56 +1,58 @@
 POST http://localhost:5147/api/v1/users HTTP/1.1
 Content-Type: application/json
 
-# {
-#   "role": "Admin",
-#   "firstName": "John",
-#   "lastName": "Doe",
-#   "email": "john.doe@example.com",
-#   "password": "SecretPassword123!",
-#   "phoneNumber": "1234567890",
-#   "addresses": [
-#     {
-#       "houseNumber": 123,
-#       "street": "Main Street",
-#       "postCode": "12345"
-#     }
-#   ]
-# }
-
 {
-  "Role": "Customer",
-  "FirstName": "Jane",
-  "LastName": "Doe",
-  "Email": "jane.doe@example.com",
-  "Password": "password123",
-  "PhoneNumber": "9876543210",
-  "Addresses": [
+  "role": "Admin",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "SecretPassword123!",
+  "phoneNumber": "1234567890",
+  "addresses": [
     {
-      "HouseNumber": 456,
-      "Street": "Oak Avenue",
-      "PostCode": "67890"
+      "houseNumber": 123,
+      "street": "Main Street",
+      "postCode": "12345"
     }
   ]
 }
+
+# {
+#   "Role": "Customer",
+#   "FirstName": "Jane",
+#   "LastName": "Doe",
+#   "Email": "jane.doe@example.com",
+#   "Password": "password123",
+#   "PhoneNumber": "9876543210",
+#   "Addresses": [
+#     {
+#       "HouseNumber": 456,
+#       "Street": "Oak Avenue",
+#       "PostCode": "67890"
+#     }
+#   ]
+# }
 
 ###
 POST http://localhost:5147/api/v1/products HTTP/1.1
 Content-Type: application/json
 
 {
-  "productName": "Dummy Product",
+  "productName": "Dummy Product 2",
   "description": "This is a dummy product description.",
-  "image": "dummy_image.jpg",
+  "image": ["dummy_image.jpg"],
   "price": "29.99",
   "stockQuantity": 100,
-  "categoryId": "4829f6ce-3515-485b-8dcc-ab80671c6272"
+  "categoryId": "7ab70fb2-3464-467f-b7c0-4735af5f5cb6",
+  "sizes": null,
+  "colors": null
 }
+
 
 ###
 GET http://localhost:5147/api/v1/products HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMyMzk0NjIsImV4cCI6MTcwMzQxMjI2MiwiaWF0IjoxNzAzMjM5NDYyLCJpc3MiOiJNYXR0aSIsImF1ZCI6IkZha2VTdG9yZUFwcFVzZXJzIn0.Kv0nq73TnrHpbihIuKE0sVRoIDg1FzK0iY5DQ6hbvu0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
 ###
 POST http://localhost:5147/api/v1/categorys HTTP/1.1
 Content-Type: application/json
@@ -64,13 +66,16 @@ Content-Type: application/json
 ###
 GET http://localhost:5147/api/v1/categorys HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMyMzk0NjIsImV4cCI6MTcwMzQxMjI2MiwiaWF0IjoxNzAzMjM5NDYyLCJpc3MiOiJNYXR0aSIsImF1ZCI6IkZha2VTdG9yZUFwcFVzZXJzIn0.Kv0nq73TnrHpbihIuKE0sVRoIDg1FzK0iY5DQ6hbvu0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
 
-###
+### ADMIN
 GET http://localhost:5147/api/v1/users HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJuYmYiOjE3MDMyMzk0NjIsImV4cCI6MTcwMzQxMjI2MiwiaWF0IjoxNzAzMjM5NDYyLCJpc3MiOiJNYXR0aSIsImF1ZCI6IkZha2VTdG9yZUFwcFVzZXJzIn0.Kv0nq73TnrHpbihIuKE0sVRoIDg1FzK0iY5DQ6hbvu0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJkNzJlMjlmMC1iZGE5LTQ1YmUtYWFmYS1hZjc4NjgzNGNkOWQiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTkzMjgzLCJleHAiOjE3MDM3NjYwODMsImlhdCI6MTcwMzU5MzI4MywiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cYpQO_mBJ9A3cv4LKmiSRT2FbQhElhOZGqTHBRJLBsk
+### test CheckUser (non admin)
+GET http://localhost:5147/api/v1/users HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NzA4ZDBhYS0zYWQzLTRkNzktYmI5ZC0zN2JkZjgwZDg0MGYiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImphbmUuZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTkzMzEzLCJleHAiOjE3MDM3NjYxMTMsImlhdCI6MTcwMzU5MzMxMywiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.eUkoObv6I5qqwoeP010lErlQADill6OMOSBqH6yJ62c
 ###
 POST http://localhost:5147/api/v1/auth HTTP/1.1
 Content-Type: application/json
@@ -89,21 +94,62 @@ Content-Type: application/json
   "password": "password123"
 }
 
-###
-PATCH http://localhost:5147/api/v1/users/6dc091d9-d3bd-46e5-8a88-e1af165f1e23 HTTP/1.1
+### - customer own info
+PATCH http://localhost:5147/api/v1/users/5708d0aa-3ad3-4d79-bb9d-37bdf80d840f HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2ZGMwOTFkOS1kM2JkLTQ2ZTUtOGE4OC1lMWFmMTY1ZjFlMjMiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImphbmUuZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzMjU5OTMzLCJleHAiOjE3MDM0MzI3MzMsImlhdCI6MTcwMzI1OTkzMywiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.vVxK10t1VDwaE2_6jYjqkXsW0f1UQq4sM_EIOCs70NI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NzA4ZDBhYS0zYWQzLTRkNzktYmI5ZC0zN2JkZjgwZDg0MGYiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImphbmUuZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTkzMzEzLCJleHAiOjE3MDM3NjYxMTMsImlhdCI6MTcwMzU5MzMxMywiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.eUkoObv6I5qqwoeP010lErlQADill6OMOSBqH6yJ62c
 
 {
-  "FirstName": "Janey",
-  "LastName": "Doe",
-  "Email": "jane.doe@example.com",
-  "PhoneNumber": "9876543210",
-  "Addresses": [
+  "firstName": "Mary Jane",
+  "lastName": "Watson",
+  "email": "jane.doe@example.com",
+  "phoneNumber": "9876543210",
+  "addresses": [
     {
-      "HouseNumber": 456,
-      "Street": "Oak Avenue",
-      "PostCode": "67890"
+      "houseNumber": 456,
+      "street": "Oak Avenue",
+      "postCode": "67890"
     }
   ]
 }
+### - admin customer info
+PATCH http://localhost:5147/api/v1/users/6dc091d9-d3bd-46e5-8a88-e1af165f1e23 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
+
+{
+  "firstName": "Mary Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "phoneNumber": "9876543210",
+  "addresses": [
+    {
+      "houseNumber": 456,
+      "street": "Oak Avenue",
+      "postCode": "67890"
+    }
+  ]
+}
+###
+PATCH http://localhost:5147/api/v1/users/d72e29f0-bda9-45be-aafa-af786834cd9d HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NzA4ZDBhYS0zYWQzLTRkNzktYmI5ZC0zN2JkZjgwZDg0MGYiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImphbmUuZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTkzMzEzLCJleHAiOjE3MDM3NjYxMTMsImlhdCI6MTcwMzU5MzMxMywiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.eUkoObv6I5qqwoeP010lErlQADill6OMOSBqH6yJ62c
+
+{
+  "firstName": "Stupid Johnny 2",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phoneNumber": "1234567890",
+  "addresses": [
+    {
+      "houseNumber": 123,
+      "street": "Main Street",
+      "postCode": "12345"
+    }
+  ]
+}
+
+###
+DELETE http://localhost:5147/api/v1/users/c2267263-3ec0-4f34-83fa-be49ae8de86f HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4Zjg5MTQ0Zi1mYzNkLTQ4MWMtYTJmMi1lZWExMjQ0Yjc0M2QiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNjE0MDk4LCJleHAiOjE3MDM3ODY4OTgsImlhdCI6MTcwMzYxNDA5OCwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.LDqb94Itg_3gBXEByUZ2su9glOakDUiDUd6fjAjhMH8

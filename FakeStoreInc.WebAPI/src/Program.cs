@@ -11,8 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using FakeStoreInc.WebAPI.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using FakeStoreInc.WebAPI.src.Authorization;
+using FakeStoreInc.Core.src.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,15 +35,16 @@ builder.Services
 .AddScoped<IProductService, ProductService>()
 .AddScoped<ICategoryService, CategoryService>()
 .AddScoped<IOrderService, OrderService>()
-.AddScoped<IOrderItemService, OrderItemService>()
+.AddScoped<IOrderDetailService, OrderDetailService>()
 .AddScoped<IAuthService, AuthService>()
 .AddScoped<IUserRepo, UserRepo>()
 .AddScoped<IProductRepo, ProductRepo>()
 .AddScoped<ICategoryRepo, CategoryRepo>()
 .AddScoped<IOrderRepo, OrderRepo>()
-.AddScoped<IOrderItemRepo, OrderItemRepo>();
+.AddScoped<IOrderDetailRepo, OrderDetailRepo>();
 
-builder.Services.AddScoped<IAuthorizationHandler, CheckUserHandler>();
+// builder.Services.AddScoped<IAuthorizationHandler, CheckUserHandler>();
+// builder.Services.AddScoped<CheckUserRequirement>(provider => new CheckUserRequirement(""));
 
 // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
 //     options =>
@@ -79,12 +81,11 @@ builder
     };
   });
 
-builder.Services.AddAuthorization(policy => {
-    policy.AddPolicy("CheckUser", policy => policy.AddRequirements(new CheckUserRequirement("defaultUserId")));
-});
+// builder.Services.AddAuthorization(policy => {
+//     policy.AddPolicy("CheckUser", policy => policy.RequireAuthenticatedUser());
+//     policy.AddPolicy("CheckUser", policy => policy.AddRequirements(new CheckUserRequirement("")));
+// });
 
-// builder.Services.AddTransient();
-// builder.Services.AddSingleton();
 
 // Add database context service
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql());

@@ -8,9 +8,11 @@ using FakeStoreInc.WebAPI.src.Database;
 
 namespace FakeStoreInc.WebAPI.src.Repository
 {
-    public class OrderItemRepo :BaseRepo<OrderItem>, IOrderItemRepo
+    public class AddressRepo : BaseRepo<Address>, IAddressRepo
     {
-        public OrderItemRepo(DatabaseContext databaseContext) :base(databaseContext)
-        {}
+        public AddressRepo(DatabaseContext databaseContext) : base(databaseContext)
+        {
+
+        }
     }
 }
