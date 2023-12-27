@@ -1,4 +1,5 @@
 using System.Drawing;
+using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Entity;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -64,8 +65,23 @@ namespace FakeStoreInc.WebAPI.src.Database
                 .HasMany(u => u.Orders)
                 .WithOne()
                 .HasForeignKey(o => o.UserId);
-
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = new Guid("00000000-0000-0000-0000-000000000666"),
+                    FirstName = "Super",
+                    LastName = "Admin",
+                    Email = "matt.rc.simpson@gmail.com",
+                    Password = HashSuperAdminPassword("SuperAdminPass2024!"),
+                    Role = Role.Admin 
+                }
+        );
             base.OnModelCreating(modelBuilder);
+        }
+        private string HashSuperAdminPassword(string originalPassword)
+        {
+            PasswordService.HashPassword(originalPassword, out string hashedPassword, out byte[] salt);
+            return hashedPassword;
         }
     }
 }
