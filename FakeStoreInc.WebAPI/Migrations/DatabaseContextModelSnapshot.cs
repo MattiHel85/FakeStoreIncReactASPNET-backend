@@ -22,7 +22,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "customer" });
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "status", new[] { "pending", "processing", "shipped", "delivered", "cancelled" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>
@@ -105,14 +104,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<int>("OrderStatus")
-                        .HasColumnType("integer")
-                        .HasColumnName("order_status");
-
-                    b.Property<int>("PaymentMethod")
-                        .HasColumnType("integer")
-                        .HasColumnName("payment_method");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
@@ -121,11 +112,18 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
+                    b.Property<Guid?>("UserId1")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id1");
+
                     b.HasKey("Id")
                         .HasName("pk_orders");
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_orders_user_id");
+
+                    b.HasIndex("UserId1")
+                        .HasDatabaseName("ix_orders_user_id1");
 
                     b.ToTable("orders", (string)null);
                 });
@@ -140,7 +138,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
-                    b.Property<Guid>("ColorId")
+                    b.Property<Guid?>("ColorId")
                         .HasColumnType("uuid")
                         .HasColumnName("color_id");
 
@@ -152,11 +150,19 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("id");
 
+                    b.Property<Guid?>("OrderId1")
+                        .HasColumnType("uuid")
+                        .HasColumnName("order_id1");
+
+                    b.Property<Guid?>("ProductId1")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id1");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("integer")
                         .HasColumnName("quantity");
 
-                    b.Property<Guid>("SizeId")
+                    b.Property<Guid?>("SizeId")
                         .HasColumnType("uuid")
                         .HasColumnName("size_id");
 
@@ -167,8 +173,20 @@ namespace FakeStoreInc.WebAPI.Migrations
                     b.HasKey("ProductId", "OrderId")
                         .HasName("pk_order_details");
 
+                    b.HasIndex("ColorId")
+                        .HasDatabaseName("ix_order_details_color_id");
+
                     b.HasIndex("OrderId")
                         .HasDatabaseName("ix_order_details_order_id");
+
+                    b.HasIndex("OrderId1")
+                        .HasDatabaseName("ix_order_details_order_id1");
+
+                    b.HasIndex("ProductId1")
+                        .HasDatabaseName("ix_order_details_product_id1");
+
+                    b.HasIndex("SizeId")
+                        .HasDatabaseName("ix_order_details_size_id");
 
                     b.ToTable("order_details", (string)null);
                 });
@@ -379,10 +397,22 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_users_user_id");
+
+                    b.HasOne("FakeStoreInc.Core.src.Entity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1")
+                        .HasConstraintName("fk_orders_users_user_id1");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.OrderDetail", b =>
                 {
+                    b.HasOne("FakeStoreInc.Core.src.Entity.ProductColor", "Color")
+                        .WithMany()
+                        .HasForeignKey("ColorId")
+                        .HasConstraintName("fk_order_details_product_color_color_id");
+
                     b.HasOne("FakeStoreInc.Core.src.Entity.Order", null)
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
@@ -390,12 +420,35 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_order_details_orders_order_id");
 
+                    b.HasOne("FakeStoreInc.Core.src.Entity.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId1")
+                        .HasConstraintName("fk_order_details_orders_order_id1");
+
                     b.HasOne("FakeStoreInc.Core.src.Entity.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_order_details_products_product_id");
+
+                    b.HasOne("FakeStoreInc.Core.src.Entity.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId1")
+                        .HasConstraintName("fk_order_details_products_product_id1");
+
+                    b.HasOne("FakeStoreInc.Core.src.Entity.ProductSize", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .HasConstraintName("fk_order_details_product_size_size_id");
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Product", b =>

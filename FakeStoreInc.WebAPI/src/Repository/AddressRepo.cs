@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.Core.src.Entity;
 using FakeStoreInc.WebAPI.src.Database;

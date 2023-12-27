@@ -35,8 +35,6 @@ namespace FakeStoreInc.WebAPI.src.Database
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
             
-            modelBuilder.HasPostgresEnum<Status>();
-            
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.OrderDetails)
                 .WithOne()

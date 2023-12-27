@@ -10,9 +10,5 @@ namespace FakeStoreInc.WebAPI.src.Repository
         public ProductRepo(DatabaseContext databaseContext) : base(databaseContext)
         {            
         }
-        // public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(Guid categoryId, GetAllOptions getAllOptions)
-        // {
-            
-        // }
     }
 }
