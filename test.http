@@ -1,37 +1,37 @@
 POST http://localhost:5147/api/v1/users HTTP/1.1
 Content-Type: application/json
 
-{
-  "role": "Admin",
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "password": "SecretPassword123!",
-  "phoneNumber": "1234567890",
-  "addresses": [
-    {
-      "houseNumber": 123,
-      "street": "Main Street",
-      "postCode": "12345"
-    }
-  ]
-}
-
 # {
-#   "Role": "Customer",
-#   "FirstName": "Jane",
-#   "LastName": "Doe",
-#   "Email": "jane.doe@example.com",
-#   "Password": "password123",
-#   "PhoneNumber": "9876543210",
-#   "Addresses": [
+#   "role": "Admin",
+#   "firstName": "John",
+#   "lastName": "Doe",
+#   "email": "john.doe@example.com",
+#   "password": "SecretPassword123!",
+#   "phoneNumber": "1234567890",
+#   "addresses": [
 #     {
-#       "HouseNumber": 456,
-#       "Street": "Oak Avenue",
-#       "PostCode": "67890"
+#       "houseNumber": 123,
+#       "street": "Main Street",
+#       "postCode": "12345"
 #     }
 #   ]
 # }
+
+{
+  "Role": "Customer",
+  "FirstName": "Jane",
+  "LastName": "Doe",
+  "Email": "jane.doe@example.com",
+  "Password": "password123",
+  "PhoneNumber": "9876543210",
+  "Addresses": [
+    {
+      "HouseNumber": 456,
+      "Street": "Oak Avenue",
+      "PostCode": "67890"
+    }
+  ]
+}
 
 ###
 POST http://localhost:5147/api/v1/products HTTP/1.1
@@ -113,7 +113,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NzA4Z
   ]
 }
 ### - admin customer info
-PATCH http://localhost:5147/api/v1/users/6dc091d9-d3bd-46e5-8a88-e1af165f1e23 HTTP/1.1
+PATCH http://localhost:5147/api/v1/users/19120097-b9d2-48fc-a8b1-9a3725832f8f HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
 
@@ -150,6 +150,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1NzA4Z
 }
 
 ###
-DELETE http://localhost:5147/api/v1/users/c2267263-3ec0-4f34-83fa-be49ae8de86f HTTP/1.1
+DELETE http://localhost:5147/api/v1/users/19120097-b9d2-48fc-a8b1-9a3725832f8f HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4Zjg5MTQ0Zi1mYzNkLTQ4MWMtYTJmMi1lZWExMjQ0Yjc0M2QiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNjE0MDk4LCJleHAiOjE3MDM3ODY4OTgsImlhdCI6MTcwMzYxNDA5OCwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.LDqb94Itg_3gBXEByUZ2su9glOakDUiDUd6fjAjhMH8

@@ -7,23 +7,23 @@ namespace FakeStoreInc.Business.src.DTO
     {
         public Status OrderStatus { get; set;}
         public PaymentMethod PaymentMethod { get; set; }
-        public User? User {get; set;}
-        public IEnumerable<OrderDetail>? OrderDetails { get; set;}
+        public Guid UserId { get; set;}
+        public IEnumerable<OrderDetailReadDTO>? OrderDetails { get; set;}
     }
 
     public class OrderUpdateDTO
     {
         public Status OrderStatus { get; set;}
         public PaymentMethod PaymentMethod { get; set; }
-        public User? User {get; set;}
-        public IEnumerable<OrderDetail>? OrderDetails { get; set;}
+        public Guid UserId { get; set;}
+        public IEnumerable<OrderDetailUpdateDTO>? OrderDetails { get; set;}
     }
 
     public class OrderCreateDTO
     {
-        public Status OrderStatus { get; set;}
+        public Status OrderStatus { get; set;} = Status.Pending;
         public PaymentMethod PaymentMethod { get; set; }
-        public User? User {get; set;}
-        public IEnumerable<OrderDetail>? OrderDetails { get; set;}
+        public Guid UserId { get; set;}
+        public IEnumerable<OrderDetailCreateDTO>? OrderDetails { get; set;}
     }
 }

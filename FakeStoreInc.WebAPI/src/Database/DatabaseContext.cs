@@ -1,5 +1,4 @@
-using System.Runtime.Intrinsics.X86;
-using System.Security.Cryptography.X509Certificates;
+using System.Drawing;
 using FakeStoreInc.Core.src.Entity;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -43,39 +42,38 @@ namespace FakeStoreInc.WebAPI.src.Database
                 .WithOne()
                 .HasForeignKey(od => od.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<OrderDetail>().HasKey("ProductId", "OrderId");
+            
             modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Product)
+                .HasOne<Product>()
                 .WithMany()
                 .HasForeignKey(od => od.ProductId);
             modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Order)
+                .HasOne<Order>()
                 .WithMany(o => o.OrderDetails)
                 .HasForeignKey(od => od.OrderId);
-            modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Size)
-                .WithMany()
-                .HasForeignKey(od => od.SizeId);
-            modelBuilder.Entity<OrderDetail>()
-                .HasOne(od => od.Color)
-                .WithMany()
-                .HasForeignKey(od => od.ColorId);
             modelBuilder.Entity<Product>()
-                .HasOne(p => p.Category)
-                .WithMany(c => c.Products)
+                .HasOne<Category>()
+                .WithMany()
                 .HasForeignKey(p => p.CategoryId);
             modelBuilder.Entity<ProductColor>()
-                .HasOne(pc => pc.Product)
-                .WithMany(p => p.Colors)
+                .HasOne<Product>()
+                .WithMany()
                 .HasForeignKey(pc => pc.ProductId);
             modelBuilder.Entity<ProductSize>()
-                .HasOne(ps => ps.Product)
-                .WithMany(p => p.Sizes)
+                .HasOne<Product>()
+                .WithMany()
                 .HasForeignKey(ps => ps.ProductId);
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Addresses)
-                .WithOne(a => a.User)
+                .WithOne()
                 .HasForeignKey(a => a.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Orders)
+                .WithOne()
+                .HasForeignKey(o => o.UserId);
 
             base.OnModelCreating(modelBuilder);
         }

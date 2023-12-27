@@ -4,8 +4,7 @@ using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Abstraction
 {
-    public interface IOrderDetailService 
-    // :IBaseService<OrderDetail, OrderDetailReadDTO, OrderDetailCreateDTO, OrderDetailUpdateDTO>
+    public interface IOrderDetailService
     {
         Task<IEnumerable<OrderDetailReadDTO>> GetAllAsync();
         Task<OrderDetailReadDTO> GetOneAsync(OrderDetailKey orderDetailKey);
