@@ -7,7 +7,5 @@ namespace FakeStoreInc.Core.src.Entity
         public Product? Product { get; set; }
         public Guid OrderId { get; set;}
         public Order? Order { get; set;}
-        public ProductSize? Size { get; set;}
-        public ProductColor? Color { get; set;}
     }
 }

@@ -15,11 +15,6 @@ namespace FakeStoreInc.Business.src.Shared
                 .ForMember(dest => dest.Addresses, opt => opt.MapFrom(s => s.Addresses));
             CreateMap<UserUpdateDTO, User>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
 
-            // CreateMap<ProductCreateDTO, Product>()
-            // .ForMember(dest => dest.Category, opt => opt.Ignore())
-            // .ForMember(dest => dest.ProductDetails, opt => opt.MapFrom(s => s.ProductDetails))
-            // .ForMember(dest => dest.ProductImages, opt => opt.MapFrom(s => s.ProductImages));
-
             CreateMap<Address, AddressReadDTO>();
             CreateMap<AddressCreateDTO, Address>();
             CreateMap<AddressUpdateDTO, Address>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
@@ -27,14 +22,6 @@ namespace FakeStoreInc.Business.src.Shared
             CreateMap<Product, ProductReadDTO>();
             CreateMap<ProductCreateDTO, Product>();
             CreateMap<ProductUpdateDTO, Product>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
-
-            CreateMap<ProductColor, ProductColorReadDTO>();
-            CreateMap<ProductColorCreateDTO, ProductColor>();
-            CreateMap<ProductColorUpdateDTO, ProductColor>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
-
-            CreateMap<ProductSize, ProductSizeReadDTO>();
-            CreateMap<ProductSizeCreateDTO, ProductSize>();
-            CreateMap<ProductSizeUpdateDTO, ProductSize>().ForAllMembers(opt => opt.Condition((src, dest, value) => value != null));
 
             CreateMap<Category, CategoryReadDTO>();
             CreateMap<CategoryCreateDTO, Category>();

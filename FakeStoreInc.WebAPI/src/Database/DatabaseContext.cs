@@ -54,14 +54,6 @@ namespace FakeStoreInc.WebAPI.src.Database
                 .HasOne<Category>()
                 .WithMany()
                 .HasForeignKey(p => p.CategoryId);
-            modelBuilder.Entity<ProductColor>()
-                .HasOne<Product>()
-                .WithMany()
-                .HasForeignKey(pc => pc.ProductId);
-            modelBuilder.Entity<ProductSize>()
-                .HasOne<Product>()
-                .WithMany()
-                .HasForeignKey(ps => ps.ProductId);
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Addresses)

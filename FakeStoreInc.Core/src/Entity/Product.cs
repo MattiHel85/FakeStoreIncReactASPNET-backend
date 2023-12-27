@@ -8,18 +8,18 @@ namespace FakeStoreInc.Core.src.Entity
         public string? Price { get; set; }
         public int StockQuantity { get; set; }
         public Guid CategoryId { get; set;}
-        public IEnumerable<ProductSize>? Sizes { get; set;}
-        public IEnumerable<ProductColor>? Colors { get; set;}
+        // public IEnumerable<ProductSize>? Sizes { get; set;}
+        // public IEnumerable<ProductColor>? Colors { get; set;}
     }
 
-    public class ProductSize : BaseEntity
-    {
-        public int Value { get; set;}
-        public Guid ProductId { get; set; }
-    }
-    public class ProductColor : BaseEntity
-    {
-        public int Value { get; set;}
-        public Guid ProductId { get; set; }
-    }
+    // public class ProductSize : BaseEntity
+    // {
+    //     public int Value { get; set;}
+    //     public Guid ProductId { get; set; }
+    // }
+    // public class ProductColor : BaseEntity
+    // {
+    //     public int Value { get; set;}
+    //     public Guid ProductId { get; set; }
+    // }
 }

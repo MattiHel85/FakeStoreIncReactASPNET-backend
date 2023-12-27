@@ -38,12 +38,12 @@ POST http://localhost:5147/api/v1/products HTTP/1.1
 Content-Type: application/json
 
 {
-  "productName": "Dummy Product 2",
+  "productName": "Dummy Product 1C",
   "description": "This is a dummy product description.",
   "image": ["dummy_image.jpg"],
   "price": "29.99",
   "stockQuantity": 100,
-  "categoryId": "f03ea1d3-bb2d-45cf-8686-6609851dc869",
+  "categoryId": "f55e0e18-70c3-4633-908e-e55d4185d0af",
   "sizes": null,
   "colors": null
 }
@@ -51,14 +51,14 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5147/api/v1/products HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
+Content-Type: application/application/json
+
 ###
 POST http://localhost:5147/api/v1/categorys HTTP/1.1
 Content-Type: application/json
 
 {
-  "categoryName": "Dummy Category",
+  "categoryName": "Dummy Category 3",
   "description": "This is a dummy category",
   "products": []
 }
@@ -66,7 +66,6 @@ Content-Type: application/json
 ###
 GET http://localhost:5147/api/v1/categorys HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2M2U5ODkwMi0xNTBmLTQ3MDQtYTMyZi1iMGM5ZjBjYWI0ZjYiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwibmJmIjoxNzAzNTgwMTkyLCJleHAiOjE3MDM3NTI5OTIsImlhdCI6MTcwMzU4MDE5MiwiaXNzIjoiTWF0dGkiLCJhdWQiOiJGYWtlU3RvcmVBcHBVc2VycyJ9.cgVY_2oh02b-XJeNrj6_m8qXU_di4U5yX_mJKo5yY_I
 
 ### ADMIN
 GET http://localhost:5147/api/v1/users HTTP/1.1
