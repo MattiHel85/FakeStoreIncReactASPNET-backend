@@ -5,7 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using FakeStoreInc.Business.src.Abstraction;
 using FakeStoreInc.Core.src.Entity;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+
 
 namespace FakeStoreInc.WebAPI.src.Service
 {
@@ -40,7 +43,12 @@ namespace FakeStoreInc.WebAPI.src.Service
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(descriptor);
-            return tokenHandler.WriteToken(token);
+
+            var tokenObject = new { Token = tokenHandler.WriteToken(token)};
+
+            var jsonToken = JsonConvert.SerializeObject(tokenObject);
+
+            return jsonToken;
         }
     }
 }
