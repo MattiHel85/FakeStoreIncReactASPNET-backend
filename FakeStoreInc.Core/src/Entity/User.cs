@@ -1,15 +1,18 @@
-using System.Dynamic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Core.src.Entity
 {
     public class User : BaseEntity
     {
         public Role Role { get; set;}
+        [Required]
         public string? FirstName { get; set; }
+        [Required]
         public string? LastName { get; set; }
+        [EmailAddress]
         public string? Email { get; set; }
+        [MinLength(8), MaxLength(20)]
         public string? Password { get; set; }
         public string? PhoneNumber { get; set; }
         public byte[]? Salt { get; set; } // Random key for hashing passwords

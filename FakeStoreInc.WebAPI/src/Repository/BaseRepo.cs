@@ -15,7 +15,7 @@ namespace FakeStoreInc.WebAPI.src.Repository
             _databaseContext = databaseContext;
             _data = _databaseContext.Set<T>();
         }
-        public async Task<T> CreateOneAsync(T createObject)
+        public virtual async Task<T> CreateOneAsync(T createObject)
         {
             await _data.AddAsync(createObject);
             await _databaseContext.SaveChangesAsync();
@@ -30,12 +30,6 @@ namespace FakeStoreInc.WebAPI.src.Repository
             {
                 return false;
             }
-
-            // var addresses = await _addressRepo.GetAddressesByUserIdAsync(userId);
-            // foreach (var address in addresses)
-            // {
-            //     await _addressRepo.DeleteOneAsync(address);
-            // }
 
             _data.Remove(existingEntity);
             await _databaseContext.SaveChangesAsync();

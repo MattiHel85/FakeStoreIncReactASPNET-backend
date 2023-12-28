@@ -6,9 +6,11 @@ using FakeStoreInc.Core.src.Entity;
 
 namespace FakeStoreInc.Business.src.Service
 {
-    public class OrderItemService : BaseService<OrderItem, OrderItemReadDTO, OrderItemCreateDTO, OrderItemUpdateDTO>, IOrderItemService
+    public class AddressService : BaseService<Address, AddressReadDTO, AddressCreateDTO, AddressUpdateDTO>, IAddressService
     {
-        public OrderItemService(IOrderItemRepo repo, IMapper mapper) : base(repo, mapper)
-        {}
+        public AddressService(IAddressRepo repo, IMapper mapper) : base(repo, mapper)
+        {
+
+        }
     }
 }

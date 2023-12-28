@@ -4,7 +4,6 @@ using FakeStoreInc.Business.src.DTO;
 using FakeStoreInc.Business.src.Shared;
 using FakeStoreInc.Core.src.Abstraction;
 using FakeStoreInc.Core.src.Entity;
-using FakeStoreInc.Core.src.Shared;
 
 namespace FakeStoreInc.Business.src.Service
 {
@@ -35,6 +34,34 @@ namespace FakeStoreInc.Business.src.Service
             user.Password = hashedPassword;
             user.Salt = salt;
             return _mapper.Map<User?, UserReadDTO>(await _repo.CreateOneAsync(user));
+        }
+
+        public override async Task<bool> UpdateOneAsync(Guid id, UserUpdateDTO updateObject)
+        {
+            var userEntity = await _repo.GetByIdAsync(id);
+            
+            if (userEntity == null)
+            {
+                return false;
+            }
+
+        
+            _mapper.Map(updateObject, userEntity);
+
+            if (updateObject.Addresses != null)
+            {
+                var existingAddresses = userEntity.Addresses.ToList();
+
+                existingAddresses.Clear();
+
+                existingAddresses.AddRange(_mapper.Map<List<Address>>(updateObject.Addresses));
+
+                userEntity.Addresses = existingAddresses;
+            }
+
+            userEntity.UpdatedDate = DateTime.UtcNow;
+
+            return await _repo.UpdateOneAsync(userEntity);
         }
     }
 }

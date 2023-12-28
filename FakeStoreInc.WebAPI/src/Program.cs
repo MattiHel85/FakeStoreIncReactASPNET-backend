@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using FakeStoreInc.WebAPI.src.Authorization;
+using FakeStoreInc.Core.src.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,38 +29,63 @@ builder.Services.AddMvc(options =>
 });
 
 // declare services
-builder.Services.AddScoped<IUserService, UserService>(); // Create instance of class UserService
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IOrderItemService, OrderItemService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserRepo, UserRepo>();
-builder.Services.AddScoped<IProductRepo, ProductRepo>();
-builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
-builder.Services.AddScoped<IOrderRepo, OrderRepo>();
-builder.Services.AddScoped<IOrderItemRepo, OrderItemRepo>();
+builder.Services
+.AddScoped<IUserService, UserService>() // Create instance of class UserService
+.AddScoped<ITokenService, TokenService>()
+.AddScoped<IProductService, ProductService>()
+.AddScoped<ICategoryService, CategoryService>()
+.AddScoped<IOrderService, OrderService>()
+.AddScoped<IOrderDetailService, OrderDetailService>()
+.AddScoped<IAuthService, AuthService>()
+.AddScoped<IUserRepo, UserRepo>()
+.AddScoped<IProductRepo, ProductRepo>()
+.AddScoped<ICategoryRepo, CategoryRepo>()
+.AddScoped<IOrderRepo, OrderRepo>()
+.AddScoped<IOrderDetailRepo, OrderDetailRepo>();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
-    options =>
+// builder.Services.AddScoped<IAuthorizationHandler, CheckUserHandler>();
+// builder.Services.AddScoped<CheckUserRequirement>(provider => new CheckUserRequirement(""));
+
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+//     options =>
+//     {
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidIssuer = builder.Configuration["Jwt:Issuer"],
+//             ValidAudience = builder.Configuration["Jwt:Audience"],
+//             IssuerSigningKey = new SymmetricSecurityKey
+//             (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
+//             ValidateIssuer = true,
+//             ValidateAudience = true,
+//             ValidateLifetime = true,
+//             ValidateIssuerSigningKey = true
+//         };
+//     }
+// );
+
+builder
+  .Services
+  .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(o =>
+  {
+    o.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
-        };
-    }
-);
+      ValidIssuer = builder.Configuration["Jwt:Issuer" ?? "Default Issuer"],
+      ValidAudience = builder.Configuration["Jwt:Audience" ?? "Default Audience"],
+      IssuerSigningKey = new SymmetricSecurityKey
+        (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "Default Key")),
+      ValidateIssuer = true,
+      ValidateAudience = true,
+      ValidateLifetime = true,
+      ValidateIssuerSigningKey = true
+    };
+  });
 
-// builder.Services.AddTransient();
-// builder.Services.AddSingleton();
+// builder.Services.AddAuthorization(policy => {
+//     policy.AddPolicy("CheckUser", policy => policy.RequireAuthenticatedUser());
+//     policy.AddPolicy("CheckUser", policy => policy.AddRequirements(new CheckUserRequirement("")));
+// });
+
 
 // Add database context service
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql());
