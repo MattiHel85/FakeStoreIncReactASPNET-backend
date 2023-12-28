@@ -16,7 +16,7 @@ namespace FakeStoreInc.Controller.src
             _userService = service;
         }
 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpGet()]
         public override async Task<ActionResult<IEnumerable<UserReadDTO>>> GetAllAsync([FromQuery] GetAllOptions getAllOptions)
         {
