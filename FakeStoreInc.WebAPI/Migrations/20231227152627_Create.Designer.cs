@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FakeStoreInc.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231227143920_RemoveProductSizeAndColorFromDb")]
-    partial class RemoveProductSizeAndColorFromDb
+    [Migration("20231227152627_Create")]
+    partial class Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,6 +289,19 @@ namespace FakeStoreInc.WebAPI.Migrations
                         .HasDatabaseName("ix_users_email");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000666"),
+                            CreatedDate = new DateTime(2023, 12, 27, 15, 26, 27, 231, DateTimeKind.Utc).AddTicks(2757),
+                            Email = "matt.rc.simpson@gmail.com",
+                            FirstName = "Super",
+                            LastName = "Admin",
+                            Password = "System.Byte[]",
+                            Role = Role.Admin,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("FakeStoreInc.Core.src.Entity.Address", b =>

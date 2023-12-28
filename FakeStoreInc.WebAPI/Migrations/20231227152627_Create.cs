@@ -131,60 +131,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "product_color",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    value = table.Column<int>(type: "integer", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    product_id1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_product_color", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_product_color_products_product_id",
-                        column: x => x.product_id,
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_product_color_products_product_id1",
-                        column: x => x.product_id1,
-                        principalTable: "products",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "product_size",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    value = table.Column<int>(type: "integer", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    product_id1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_product_size", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_product_size_products_product_id",
-                        column: x => x.product_id,
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_product_size_products_product_id1",
-                        column: x => x.product_id1,
-                        principalTable: "products",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "order_details",
                 columns: table => new
                 {
@@ -193,8 +139,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     product_id1 = table.Column<Guid>(type: "uuid", nullable: true),
                     order_id1 = table.Column<Guid>(type: "uuid", nullable: true),
-                    size_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    color_id = table.Column<Guid>(type: "uuid", nullable: true),
                     id = table.Column<int>(type: "integer", nullable: false),
                     created_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     updated_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -214,16 +158,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                         principalTable: "orders",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_order_details_product_color_color_id",
-                        column: x => x.color_id,
-                        principalTable: "product_color",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_order_details_product_size_size_id",
-                        column: x => x.size_id,
-                        principalTable: "product_size",
-                        principalColumn: "id");
-                    table.ForeignKey(
                         name: "fk_order_details_products_product_id",
                         column: x => x.product_id,
                         principalTable: "products",
@@ -236,15 +170,15 @@ namespace FakeStoreInc.WebAPI.Migrations
                         principalColumn: "id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "users",
+                columns: new[] { "id", "created_date", "email", "first_name", "last_name", "password", "phone_number", "role", "salt", "updated_date" },
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000666"), new DateTime(2023, 12, 27, 15, 26, 27, 231, DateTimeKind.Utc).AddTicks(2757), "matt.rc.simpson@gmail.com", "Super", "Admin", "System.Byte[]", null, Role.Admin, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
             migrationBuilder.CreateIndex(
                 name: "ix_addresses_user_id",
                 table: "addresses",
                 column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_order_details_color_id",
-                table: "order_details",
-                column: "color_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_order_details_order_id",
@@ -262,11 +196,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 column: "product_id1");
 
             migrationBuilder.CreateIndex(
-                name: "ix_order_details_size_id",
-                table: "order_details",
-                column: "size_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_orders_user_id",
                 table: "orders",
                 column: "user_id");
@@ -275,26 +204,6 @@ namespace FakeStoreInc.WebAPI.Migrations
                 name: "ix_orders_user_id1",
                 table: "orders",
                 column: "user_id1");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_color_product_id",
-                table: "product_color",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_color_product_id1",
-                table: "product_color",
-                column: "product_id1");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_size_product_id",
-                table: "product_size",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_product_size_product_id1",
-                table: "product_size",
-                column: "product_id1");
 
             migrationBuilder.CreateIndex(
                 name: "ix_products_category_id",
@@ -326,16 +235,10 @@ namespace FakeStoreInc.WebAPI.Migrations
                 name: "orders");
 
             migrationBuilder.DropTable(
-                name: "product_color");
-
-            migrationBuilder.DropTable(
-                name: "product_size");
+                name: "products");
 
             migrationBuilder.DropTable(
                 name: "users");
-
-            migrationBuilder.DropTable(
-                name: "products");
 
             migrationBuilder.DropTable(
                 name: "categories");
