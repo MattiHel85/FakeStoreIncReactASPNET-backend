@@ -21,7 +21,7 @@ namespace FakeStoreInc.Controller.src
         {
             return CreatedAtAction(nameof(CreateOneAsync),await _service.CreateOneAsync(createObject));
         }
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpDelete("{id:guid}")]
         public virtual async Task<ActionResult<bool>> DeleteOneAsync([FromRoute]Guid id)
         {
@@ -32,7 +32,7 @@ namespace FakeStoreInc.Controller.src
         {
             return Ok(await _service.GetAllAsync(getAllOptions));
         }
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<TReadDto>> GetByIdAsync([FromRoute]Guid id)
         {
@@ -40,7 +40,7 @@ namespace FakeStoreInc.Controller.src
         }
         
         // [Authorize(Policy = "CheckUser")] 
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         [HttpPatch("{id:guid}")]
         public virtual async Task<ActionResult<bool>> UpdateOneAsync([FromRoute]Guid id, [FromBody]TUpdateDto updateObject)
         {
