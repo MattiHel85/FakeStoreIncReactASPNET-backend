@@ -10,10 +10,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using FakeStoreInc.WebAPI.src.Authorization;
-using FakeStoreInc.Core.src.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
