@@ -291,7 +291,7 @@ namespace FakeStoreInc.WebAPI.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000666"),
-                            CreatedDate = new DateTime(2023, 12, 27, 15, 26, 27, 231, DateTimeKind.Utc).AddTicks(2757),
+                            CreatedDate = new DateTime(2023, 12, 29, 11, 20, 36, 211, DateTimeKind.Utc).AddTicks(5236),
                             Email = "matt.rc.simpson@gmail.com",
                             FirstName = "Super",
                             LastName = "Admin",

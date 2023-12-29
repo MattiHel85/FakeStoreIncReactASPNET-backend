@@ -1,0 +1,213 @@
+# @name Create Products
+
+###
+GET http://localhost:5147/api/v1/products HTTP/1.1
+Content-Type: application/application/json
+
+### Clothing - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "T-Shirt",
+  "description": "Comfortable cotton T-shirt for everyday wear.",
+  "image": ["tshirt_image.jpg"],
+  "price": "19.99",
+  "stockQuantity": 50,
+  "categoryId": ""
+}
+
+### Clothing - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Jeans",
+  "description": "Classic denim jeans for a stylish look.",
+  "image": ["jeans_image.jpg"],
+  "price": "39.99",
+  "stockQuantity": 30,
+  "categoryId": ""
+}
+
+### Home and Furniture - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Coffee Table",
+  "description": "Modern coffee table for your living room.",
+  "image": ["coffee_table_image.jpg"],
+  "price": "129.99",
+  "stockQuantity": 40,
+  "categoryId": ""
+}
+
+### Home and Furniture - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Desk Chair",
+  "description": "Ergonomic desk chair for a comfortable workspace.",
+  "image": ["desk_chair_image.jpg"],
+  "price": "79.99",
+  "stockQuantity": 30,
+  "categoryId": ""
+}
+
+### Toys and Games - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Board Game",
+  "description": "Entertaining board game for family fun.",
+  "image": ["board_game_image.jpg"],
+  "price": "39.99",
+  "stockQuantity": 60,
+  "categoryId": ""
+}
+
+### Toys and Games - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Stuffed Animal",
+  "description": "Adorable stuffed animal for cuddling.",
+  "image": ["stuffed_animal_image.jpg"],
+  "price": "14.99",
+  "stockQuantity": 90,
+  "categoryId": ""
+}
+
+### Beauty and Personal Care - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Skincare Set",
+  "description": "Complete skincare set for a radiant complexion.",
+  "image": ["skincare_set_image.jpg"],
+  "price": "79.99",
+  "stockQuantity": 50,
+  "categoryId": ""
+}
+
+### Beauty and Personal Care - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Perfume",
+  "description": "Fragrant perfume for a lasting scent.",
+  "image": ["perfume_image.jpg"],
+  "price": "49.99",
+  "stockQuantity": 40,
+  "categoryId": ""
+}
+
+### Sports and Outdoors - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Running Shoes",
+  "description": "High-performance running shoes for athletes.",
+  "image": ["running_shoes_image.jpg"],
+  "price": "89.99",
+  "stockQuantity": 30,
+  "categoryId": ""
+}
+
+### Sports and Outdoors - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Yoga Mat",
+  "description": "Durable yoga mat for a comfortable workout.",
+  "image": ["yoga_mat_image.jpg"],
+  "price": "19.99",
+  "stockQuantity": 70,
+  "categoryId": ""
+}
+
+### Automotive - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Car Wax",
+  "description": "Premium car wax for a shiny finish.",
+  "image": ["car_wax_image.jpg"],
+  "price": "29.99",
+  "stockQuantity": 25,
+  "categoryId": ""
+}
+
+### Automotive - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Tire Shine",
+  "description": "Long-lasting tire shine for a clean look.",
+  "image": ["tire_shine_image.jpg"],
+  "price": "14.99",
+  "stockQuantity": 40,
+  "categoryId": ""
+}
+
+### Jewelry - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Silver Necklace",
+  "description": "Elegant silver necklace for a touch of sophistication.",
+  "image": ["silver_necklace_image.jpg"],
+  "price": "59.99",
+  "stockQuantity": 20,
+  "categoryId": ""
+}
+
+### Jewelry - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Gold Bracelet",
+  "description": "Stylish gold bracelet to complement any outfit.",
+  "image": ["gold_bracelet_image.jpg"],
+  "price": "79.99",
+  "stockQuantity": 30,
+  "categoryId": ""
+}
+
+### Health and Wellness - Product 1
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Vitamin Supplement",
+  "description": "Essential vitamin supplement for overall health.",
+  "image": ["vitamin_supplement_image.jpg"],
+  "price": "24.99",
+  "stockQuantity": 50,
+  "categoryId": ""
+}
+
+### Health and Wellness - Product 2
+POST http://localhost:5147/api/v1/products
+Content-Type: application/json
+
+{
+  "productName": "Fitness Tracker",
+  "description": "Advanced fitness tracker for activity monitoring.",
+  "image": ["fitness_tracker_image.jpg"],
+  "price": "69.99",
+  "stockQuantity": 35,
+  "categoryId": ""
+}

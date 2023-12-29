@@ -22,7 +22,7 @@ namespace FakeStoreInc.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("ElephantDb"));
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Render"));
             dataSourceBuilder.MapEnum<Role>();
             var dataSource = dataSourceBuilder.Build();
             optionsBuilder
