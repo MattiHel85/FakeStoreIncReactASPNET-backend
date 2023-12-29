@@ -44,7 +44,22 @@ namespace FakeStoreInc.WebAPI.src.Service
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(descriptor);
 
-            var tokenObject = new { Token = tokenHandler.WriteToken(token)};
+            var tokenObject = new 
+            {
+                accessToken = tokenHandler.WriteToken(token),
+                user = new
+                {
+                    id = user.Id,
+                    Role = user.Role,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Addresses = user.Addresses,
+                }
+            };
+
+            // var tokenObject = new { Token = tokenHandler.WriteToken(token)};
 
             var jsonToken = JsonConvert.SerializeObject(tokenObject);
 
