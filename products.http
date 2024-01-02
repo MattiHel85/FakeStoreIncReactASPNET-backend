@@ -11,10 +11,10 @@ Content-Type: application/json
 {
   "productName": "T-Shirt",
   "description": "Comfortable cotton T-shirt for everyday wear.",
-  "image": ["tshirt_image.jpg"],
+  "image": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"],
   "price": "19.99",
   "stockQuantity": 50,
-  "categoryId": ""
+  "categoryId": "a405c855-304a-45a3-b94c-261bb8a80833"
 }
 
 ### Clothing - Product 2
@@ -24,10 +24,10 @@ Content-Type: application/json
 {
   "productName": "Jeans",
   "description": "Classic denim jeans for a stylish look.",
-  "image": ["jeans_image.jpg"],
+  "image": ["https://nudie.centracdn.net/client/dynamic/images/7475_2acff449c8-113986-lean-dean-troubled-sea-03-flatshot-800.jpg"],
   "price": "39.99",
   "stockQuantity": 30,
-  "categoryId": ""
+  "categoryId": "a405c855-304a-45a3-b94c-261bb8a80833"
 }
 
 ### Home and Furniture - Product 1
@@ -37,10 +37,10 @@ Content-Type: application/json
 {
   "productName": "Coffee Table",
   "description": "Modern coffee table for your living room.",
-  "image": ["coffee_table_image.jpg"],
+  "image": ["https://cdn1.jysk.com/getimage/wd2.medium/212282"],
   "price": "129.99",
   "stockQuantity": 40,
-  "categoryId": ""
+  "categoryId": "d3a636d8-93a8-4834-ab4a-387fd76494bc"
 }
 
 ### Home and Furniture - Product 2
@@ -50,10 +50,10 @@ Content-Type: application/json
 {
   "productName": "Desk Chair",
   "description": "Ergonomic desk chair for a comfortable workspace.",
-  "image": ["desk_chair_image.jpg"],
+  "image": ["https://static.työtuoli.fi/tyotuoli-pro-20-plus-musta-tyotuoli-kasinojilla_m.jpg"],
   "price": "79.99",
   "stockQuantity": 30,
-  "categoryId": ""
+  "categoryId": "d3a636d8-93a8-4834-ab4a-387fd76494bc"
 }
 
 ### Toys and Games - Product 1
@@ -63,10 +63,10 @@ Content-Type: application/json
 {
   "productName": "Board Game",
   "description": "Entertaining board game for family fun.",
-  "image": ["board_game_image.jpg"],
+  "image": ["https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/The_Game_of_Life_%E4%BA%BA%E7%94%9F%E3%82%B2%E3%83%BC%E3%83%A0_DSCF2280.jpg/640px-The_Game_of_Life_%E4%BA%BA%E7%94%9F%E3%82%B2%E3%83%BC%E3%83%A0_DSCF2280.jpg"],
   "price": "39.99",
   "stockQuantity": 60,
-  "categoryId": ""
+  "categoryId": "167a5279-0b91-4591-a2b6-3efc37b9074b"
 }
 
 ### Toys and Games - Product 2
@@ -76,10 +76,10 @@ Content-Type: application/json
 {
   "productName": "Stuffed Animal",
   "description": "Adorable stuffed animal for cuddling.",
-  "image": ["stuffed_animal_image.jpg"],
+  "image": ["https://i.ebayimg.com/images/g/-hkAAOSw4ohi4OJT/s-l1600.jpg"],
   "price": "14.99",
   "stockQuantity": 90,
-  "categoryId": ""
+  "categoryId": "167a5279-0b91-4591-a2b6-3efc37b9074b"
 }
 
 ### Beauty and Personal Care - Product 1
@@ -89,10 +89,10 @@ Content-Type: application/json
 {
   "productName": "Skincare Set",
   "description": "Complete skincare set for a radiant complexion.",
-  "image": ["skincare_set_image.jpg"],
+  "image": ["https://www.thebodyshop.fi/media/catalog/product/cache/c7199fe456d351eedb75b72b643396b3/4/0/40545_1.jpg"],
   "price": "79.99",
   "stockQuantity": 50,
-  "categoryId": ""
+  "categoryId": "b95ac99c-a4c1-4fd2-8b92-beeb09501db1"
 }
 
 ### Beauty and Personal Care - Product 2
@@ -102,10 +102,10 @@ Content-Type: application/json
 {
   "productName": "Perfume",
   "description": "Fragrant perfume for a lasting scent.",
-  "image": ["perfume_image.jpg"],
+  "image": ["https://www.lucian.store/cdn/shop/articles/IMG_1224.JPG"],
   "price": "49.99",
   "stockQuantity": 40,
-  "categoryId": ""
+  "categoryId": "b95ac99c-a4c1-4fd2-8b92-beeb09501db1"
 }
 
 ### Sports and Outdoors - Product 1
@@ -115,12 +115,12 @@ Content-Type: application/json
 {
   "productName": "Running Shoes",
   "description": "High-performance running shoes for athletes.",
-  "image": ["running_shoes_image.jpg"],
+  "image": ["https://hips.hearstapps.com/hmg-prod/images/run-reebok-running-shoes-64e3beadbe692.jpg"],
   "price": "89.99",
   "stockQuantity": 30,
-  "categoryId": ""
+  "categoryId": "53fe5309-fa25-47b3-b8df-0e9de80a872a"
 }
-
+# Continue from here 
 ### Sports and Outdoors - Product 2
 POST http://localhost:5147/api/v1/products
 Content-Type: application/json
@@ -128,10 +128,10 @@ Content-Type: application/json
 {
   "productName": "Yoga Mat",
   "description": "Durable yoga mat for a comfortable workout.",
-  "image": ["yoga_mat_image.jpg"],
+  "image": ["https://www.fitnesstukku.fi/dw/image/v2/BDJH_PRD/on/demandware.static/-/Sites-hsng-master-catalog/default/dwd23449e7/Hi-res/6/2/62187_gaiam_6mm_yoga_mat_teal_marrakesh_longer_wider_3.jpg?sw=655&sh=655&sm=fit&sfrm=jpg"],
   "price": "19.99",
   "stockQuantity": 70,
-  "categoryId": ""
+  "categoryId": "53fe5309-fa25-47b3-b8df-0e9de80a872a"
 }
 
 ### Automotive - Product 1
@@ -141,10 +141,10 @@ Content-Type: application/json
 {
   "productName": "Car Wax",
   "description": "Premium car wax for a shiny finish.",
-  "image": ["car_wax_image.jpg"],
+  "image": ["https://media.autodoc.de/360_photos/13649665/preview.jpg"],
   "price": "29.99",
   "stockQuantity": 25,
-  "categoryId": ""
+  "categoryId": "34a41f74-3ecc-410b-94a3-a25e2326127b"
 }
 
 ### Automotive - Product 2
@@ -154,10 +154,10 @@ Content-Type: application/json
 {
   "productName": "Tire Shine",
   "description": "Long-lasting tire shine for a clean look.",
-  "image": ["tire_shine_image.jpg"],
+  "image": ["https://www.jarimaki.fi/images/kuvapankki/maxi/ArmorAll-Extreme-Tire-Shine--650ml-31384.jpg"],
   "price": "14.99",
   "stockQuantity": 40,
-  "categoryId": ""
+  "categoryId": "34a41f74-3ecc-410b-94a3-a25e2326127b"
 }
 
 ### Jewelry - Product 1
@@ -167,10 +167,10 @@ Content-Type: application/json
 {
   "productName": "Silver Necklace",
   "description": "Elegant silver necklace for a touch of sophistication.",
-  "image": ["silver_necklace_image.jpg"],
+  "image": ["https://eu-images.contentstack.com/v3/assets/blt7dcd2cfbc90d45de/blt590deaba1063ca36/60dbb9f0ed93bb0fb199e65c/g-ne-10mm_2_9.jpg"],
   "price": "59.99",
   "stockQuantity": 20,
-  "categoryId": ""
+  "categoryId": "3357f535-991d-4b3f-855a-cf294e66bf30"
 }
 
 ### Jewelry - Product 2
@@ -180,10 +180,10 @@ Content-Type: application/json
 {
   "productName": "Gold Bracelet",
   "description": "Stylish gold bracelet to complement any outfit.",
-  "image": ["gold_bracelet_image.jpg"],
+  "image": ["https://eu-images.contentstack.com/v3/assets/blt7dcd2cfbc90d45de/bltbf2306e6ec7c2ac6/60dbba64a37ada0f2ccfb591/g-br-10mm_1_3.jpg"],
   "price": "79.99",
   "stockQuantity": 30,
-  "categoryId": ""
+  "categoryId": "3357f535-991d-4b3f-855a-cf294e66bf30"
 }
 
 ### Health and Wellness - Product 1
@@ -193,10 +193,10 @@ Content-Type: application/json
 {
   "productName": "Vitamin Supplement",
   "description": "Essential vitamin supplement for overall health.",
-  "image": ["vitamin_supplement_image.jpg"],
+  "image": ["https://static.thcdn.com/images/large/webp//productimg/1600/1600/10530076-1104854679981869.jpg"],
   "price": "24.99",
   "stockQuantity": 50,
-  "categoryId": ""
+  "categoryId": "3263f67b-b216-4b33-8af2-cb7ceb61daab"
 }
 
 ### Health and Wellness - Product 2
@@ -206,8 +206,8 @@ Content-Type: application/json
 {
   "productName": "Fitness Tracker",
   "description": "Advanced fitness tracker for activity monitoring.",
-  "image": ["fitness_tracker_image.jpg"],
+  "image": ["https://cdn.verk.net/kuvastin/w:816/h:510/rt:fit/q:80/sh:0.5/plain/images/82/2_788692-1786x2683.jpg"],
   "price": "69.99",
   "stockQuantity": 35,
-  "categoryId": ""
+  "categoryId": "3263f67b-b216-4b33-8af2-cb7ceb61daab"
 }

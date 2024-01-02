@@ -27,11 +27,12 @@ You can follow the same topics as your backend project or choose the alternative
 
 ## Instruction
 
-This repository should be used only for backend server. The frontend server should be done in a separate repository [here](https://github.com/Integrify-Finland/fs16_6-frontend-project). You can modify your previous frontend project and instructors will check the submissions (pull requests) in the frontend project repository. The modified frontend server need to be connected with this backend server to make a whole fullstack project.
+This repository is used only for backend server. The frontend server is done in a separate repository [here](https://github.com/MattiHel85/fs16_6-frontend-project). I modified the front end both in logic and in styling so I have two separately deployed projects both using similar APIs (mine and the Platzi Fake Store API mentioned below)
 
 ### Frontend
+The front end is deployed [here](https://fakestoreinc.netlify.app) from the GitHub repository found [here](https://github.com/MattiHel85/fs16_6-frontend-project)
 
-If you only modify the previoud frontend project, you can work on the same repository and there is no need to open new pull request. However, you can get back to your previous pull request and remove all the labels. In case you want to make new project from scratch, you can fork and clone the original repository and open new pullrequest for your new frontend.
+It is a modified version of the previous front end project which originally used the [Platzi Fake Store API](https://fakeapi.platzi.com/) but is now using the API I created using ASP.NET Core, Entity Framework Core, and PostgreSQL.
 
 ### Backend
 
@@ -43,67 +44,62 @@ Generate a solution file inside this repository. All the project layers of backe
 
 #### User Functionalities
 
-1. User Management: Users should be able to register for an user account and log in. Users cannot register themselves as admin.
-2. Browse Products: Users should be able to view all available products and single product, search and sort products.
-3. Add to Cart: Users should be able to add products to a shopping cart, and manage cart.
-4. Checkout: Users should be able to place orders.
+1. User Management: Users can register for an user account and log in. Users cannot register themselves as admin.
+2. Browse Products: Users can view all available products and single product, search and sort products.
+3. Add to Cart: Users can add products to a shopping cart, and manage cart.
+4. Checkout: Users will be able to place orders in the future.
 
 #### Admin Functionalities
 
-1. User Management: Admins should be able to view and delete users.
-2. Product Management: Admins should be able to view, edit, delete and add new products.
-3. Order Management: Admins should be able to view all orders.
+1. User Management: Admins can view and delete users.
+2. Product Management: Admins can view, edit, delete and add new products.
+2. Category Management: Admins can view, edit, delete and add new categories.
+3. Order Management: Admins will be able to view all orders.
 
 ### Extra features
 
 #### User Functionalities
 
-1. User Management: Users should be able to view and edit only certain properties in their accounts. They also can unregister their own accounts.
-2. Authentication and account registration with Google Oauth.
-3. Order Management: Users should be able to view their order history, track the status of their orders, and potentially cancel orders within a certain timeframe.
+1. User Management: Users can view and edit only certain properties in their accounts. They also can unregister their own accounts.
+2. Authentication and account registration with JWT tokens (Google Oauth to come later).
+3. Order Management: Users will be able to view their order history, track the status of their orders, and potentially cancel orders within a certain timeframe.
 
 #### Admin Functionalities
 
-1. User Management: Admins should be able to edit users' role and create new users and admins.
-2. Order Management: Admins should be able to update order status, view order details, and cancel orders.
+1. User Management: Admins are able to edit users' role and create new users and admins.
+2. Order Management: Admins will able to update order status, view order details, and cancel orders.
 
-And any other extra features that you want to implement (like file upload, reviews, payment, email, etc.).
 
-## Requirements
+# Completed Project Summary
 
-1. Apply CLEAN architecture in your backend. In README file, explain the architecture of your project as well.
-2. Error handler: This will ensure any exceptions thrown in your application are handled appropriately and helpful error messages are returned.
-3. In backend server, unit testing (xunit) should be done, at least for Service(Use case) layer. We recommend to test entities, repositories and controllers as well.
-4. Document with Swagger: Make sure to annotate your API endpoints and generate a Swagger UI for easier testing and documentation.
-5. Project should have proper file structure, naming convention, and comply with Rest API.
-6. `README` file should sufficiently describe the project, as well as the deployment, link to frontend github as well.
-7. Frontend, backend, and database servers need to be available in the live servers.  
+## Requirements Fulfilled:
 
-## Getting Started
+### 1. CLEAN Architecture Implementation:
 
-1. Start with backend first before moving to frontend.
-2. In the backend, here is the recommended order:
+- Applied CLEAN architecture in the backend.
 
-   - Plan Your Database Schema before start coding
+### 2. Error Handling:
 
-   - Set Up the Project Structure
+- Implemented an error handler to manage exceptions within the application.
+- Ensured appropriate handling and returned helpful error messages.
 
-   - Build the models
+### 3. Unit Testing:
 
-   - Create the Repositories
+- This has not been implemented yet, but is coming in the near future
 
-   - Build the Services
+### 4. Swagger Documentation:
 
-   - Set Up Authentication & Authorization
+- Annotated API endpoints for comprehensive documentation.
+- Generated Swagger UI for simplified testing and documentation.
 
-   - Build the Controllers
+![address endpoints](address-uri.png)
+![auth endpoint](auth-uri.png)
+![category endpoints](category-uri.png)
+![product and user endpoints](product-and-user-uri.png)
+![order endpoints](order-uri.png)
 
-   - Implement Error Handling Middleware
+### 5. File Structure and Naming Conventions:
 
-3. You should focus on the mandatory features first. Make sure you have minimal working project before opting for advanced functionalities.
+- Established a proper file structure and adhered to consistent naming conventions.
+- Ensured compliance with Rest API standards.
 
-Testing should be done along the development circle, early and regularly.
-
-## Testing
-
-Unit testing, and optionally integration testing, must be included for both frontend and backend code. Aim for high test coverage and ensure all major functionalities are covered.
