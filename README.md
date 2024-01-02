@@ -36,11 +36,29 @@ It is a modified version of the previous front end project which originally used
 
 ### Backend
 
-Generate a solution file inside this repository. All the project layers of backend server should be added into this solution.
+The backend was created using SP.NET Core, Entity Framework Core, and PostgreSQL and is hosted in Azure and requests can be sent to the following end points
+
+## AUTH
+GET, POST https://fakestoreinc.azurewebsites.net/api/v1/auth
+
+## USERS
+GET, POST https://fakestoreinc.azurewebsites.net/api/v1/users
+GET, PATCH, DELETE https://fakestoreinc.azurewebsites.net/api/v1/users/:id
+
+## PRODUCTS
+GET, POST https://fakestoreinc.azurewebsites.net/api/v1/products/
+GET, PATCH, DELETE https://fakestoreinc.azurewebsites.net/api/v1/products/:id
+
+## CATEGORIES
+GET, POST https://fakestoreinc.azurewebsites.net/api/v1/categorys/
+GET, PATCH, DELETE https://fakestoreinc.azurewebsites.net/api/v1/categorys/:id
+
+## ORDERS
+GET, POST https://fakestoreinc.azurewebsites.net/api/v1/orders
+GET, PATCH, DELETE https://fakestoreinc.azurewebsites.net/api/v1/orders/:id
+
 
 ## Features
-
-### Mandatory features
 
 #### User Functionalities
 
